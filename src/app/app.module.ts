@@ -18,6 +18,12 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
+// FireBase
+import { firebaseConfig } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
@@ -28,11 +34,17 @@ import { NotificationsComponent } from './components/notifications/notifications
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,
-    SearchFilterPageModule
+    SearchFilterPageModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   entryComponents: [NotificationsComponent],
   providers: [
     StatusBar,
+    AngularFireModule,
+    AngularFireAuth,
+    AngularFireAuthModule,
+    AngularFirestore,
+    AngularFirestoreModule,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

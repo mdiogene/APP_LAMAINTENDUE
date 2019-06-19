@@ -28,19 +28,27 @@ export class AppComponent {
         direct: 'root',
         icon: 'home'
       },
+
       {
-        title: 'About',
-        url: '/about',
+        title: 'lmt chat',
+        url: '/chat',
         direct: 'forward',
-        icon: 'information-circle-outline'
+        icon: 'chatbubbles'
       },
 
       {
+        title: 'Calendar',
+        url: '/calendar',
+        direct: 'forward',
+        icon: 'calendar'
+      },
+
+     /* {
         title: 'App Settings',
         url: '/settings',
         direct: 'forward',
         icon: 'cog'
-      }
+      }*/
     ];
 
     this.initializeApp();

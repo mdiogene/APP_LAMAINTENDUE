@@ -1,0 +1,40 @@
+<!----<ion-header>
+  <ion-toolbar>
+    <ion-title>chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+</ion-content>-->
+
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>LMT CHAT</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="chat" *ngFor="let chat of chatRef | async">
+        <div class="me" *ngIf="uid == chat.userid">
+            {{chat.Message}}
+        </div>
+
+        <div class="you" *ngIf="uid != chat.userid">
+            <span class="name">
+            {{ chat.Name}}
+          </span> <br> {{ chat.Message }}
+        </div>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-item>
+        <ion-input placeholder="Type..." [(ngModel)]="text"></ion-input>
+        <ion-button (click)="send()" fill="clear" icon-only slot="end">
+            <ion-icon name="send"></ion-icon>
+        </ion-button>
+    </ion-item>
+</ion-footer>

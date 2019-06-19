@@ -1,0 +1,87 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    .me {
+        position: relative;
+        margin: 20px 5px 0px;
+        max-width: 80%;
+        align-self: flex-end;
+        padding: 6px 10px 7px;
+        border-radius: 15px 15px 0;
+        background: #32db64;
+        //float: left;
+        font-size: medium;
+        line-height: 1.4;
+        .name {
+            font-size: small;
+            font-weight: bold;
+        }
+    }
+    .you {
+        position: relative;
+        margin: 15px;
+        max-width: 80%;
+        align-self: flex-start;
+        padding: 6px 10px 7px;
+        border-radius: 15px 15px 15px 0;
+        background: #3281db;
+        //float: right;
+        font-size: medium;
+        line-height: 1.4;
+        .name {
+            font-size: small;
+            font-weight: bold;
+        }
+    }
+}
+
+
+/*
+.chat {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #B2B2B2;
+    display: inline-block;
+    padding: 10px 18px;
+    position: relative;
+    vertical-align: top;
+}
+
+.chat::before {
+    content: "\00a0";
+    display: block;
+    height: 16px;
+    position: absolute;
+    top: 11px;
+    transform: rotate( 29deg) skew( -35deg);
+    -moz-transform: rotate( 29deg) skew( -35deg);
+    -ms-transform: rotate( 29deg) skew( -35deg);
+    -o-transform: rotate( 29deg) skew( -35deg);
+    -webkit-transform: rotate( 29deg) skew( -35deg);
+    width: 20px;
+}
+
+.me {
+    background-color: #DEDEE5;
+    float: left;
+    margin: 5px 45px 5px 20px;
+}
+
+.me::before {
+    background-color: #DEDEE5;
+    box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4);
+    left: -9px;
+}
+
+.you {
+    background-color: #40A8FC;
+    float: right;
+    margin: 5px 20px 5px 45px;
+}
+
+.you::before {
+    background-color: #40A8FC;
+    box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4);
+    right: -9px;
+} */

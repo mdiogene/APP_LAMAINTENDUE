@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +10,8 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  email: string;
+  password: string;
   public onLoginForm: FormGroup;
 
   constructor(
@@ -16,7 +20,9 @@ export class LoginPage implements OnInit {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ionViewWillEnter() {
@@ -25,14 +31,21 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
-    this.onLoginForm = this.formBuilder.group({
+
+    /*this.onLoginForm = this.formBuilder.group({
       'email': [null, Validators.compose([
         Validators.required
       ])],
       'password': [null, Validators.compose([
         Validators.required
       ])]
-    });
+    });*/
+  }
+
+  OnSubmitLogin() {
+    this.authService.login(this.email, this.password).then(res => {
+      this.router.navigate(['/home-results']);
+    }).catch(er => alert('user n\'existe pas'));
   }
 
   async forgotPass() {
@@ -81,9 +94,9 @@ export class LoginPage implements OnInit {
   }
 
   // // //
-  goToRegister() {
+  /*goToRegister() {
     this.navCtrl.navigateRoot('/register');
-  }
+  }*/
 
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
