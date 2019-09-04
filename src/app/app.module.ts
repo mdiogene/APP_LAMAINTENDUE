@@ -24,6 +24,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 
+// Geolocation
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+// pour utiliser google maps et firebase
+import { Device } from '@ionic-native/device/ngx';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
@@ -45,6 +50,8 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestor
     AngularFireAuthModule,
     AngularFirestore,
     AngularFirestoreModule,
+    Geolocation,
+    Device,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

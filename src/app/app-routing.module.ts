@@ -11,6 +11,7 @@ const routes: Routes = [
   // { path: 'chat', loadChildren: './pages/chat/chat/chat.module#ChatPageModule' },
   { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },  { path: 'chat', loadChildren: './pages/chat/chat/chat.module#ChatPageModule' },
   { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' },
+  { path: 'geoloc', loadChildren: './pages/geoloc/geoloc.module#GeolocPageModule' },
 
 
 ];

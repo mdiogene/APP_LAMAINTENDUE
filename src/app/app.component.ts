@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Pages } from './interfaces/pages';
+import {Subscription} from 'rxjs';
+import {User} from '../models/User';
+import {AuthService} from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +17,15 @@ import { Pages } from './interfaces/pages';
 export class AppComponent {
 
   public appPages: Array<Pages>;
+  userSubscription: Subscription;
+  localUser = new User();
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private authService: AuthService,
   ) {
     this.appPages = [
       {
@@ -42,6 +48,12 @@ export class AppComponent {
         direct: 'forward',
         icon: 'calendar'
       },
+      {
+        title: 'lmt Geolok',
+        url: '/geoloc',
+        direct: 'forward',
+        icon: 'locate',
+      },
 
      /* {
         title: 'App Settings',
@@ -51,6 +63,14 @@ export class AppComponent {
       }*/
     ];
 
+    this.userSubscription = this.authService.userSubject.subscribe(
+        (user: User) => {
+          this.localUser = user;
+        }
+    );
+
+    this.authService.getAllUsers();
+console.log(this.localUser);
     this.initializeApp();
   }
 
@@ -65,7 +85,10 @@ export class AppComponent {
     this.navCtrl.navigateForward('edit-profile');
   }
 
-  logout() {
+  Onlogout() {
     this.navCtrl.navigateRoot('/');
+      // tslint:disable-next-line:no-unused-expression
+      this.authService.logout();
   }
+
 }

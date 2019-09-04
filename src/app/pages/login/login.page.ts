@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
-
+ 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
   }
