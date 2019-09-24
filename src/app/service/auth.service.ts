@@ -48,22 +48,6 @@ usersMap: Map<string, User> = new Map();
     }
   }
 
-  /*getAllUsers(): void {
-    this.fs.collection('Users').get()
-        .subscribe(usersDoc => {
-              usersDoc.forEach(doc => {
-                if (!this.usersMap.has(doc.id)) {
-                  this.usersMap.set(doc.id, <User>doc.data());
-                  // this.users.unshift(<User>doc.data());
-                }
-              });
-            },
-            () => {
-              console.log('Erreur de suppression' + error);
-            });*/
-   // console.log('Le print de users map est:' );
-    // console.log( this.usersMap );
-
     getAllUsers(): void {
       this.fs.collection('Users').get()
           .subscribe(usersDoc => {
@@ -88,5 +72,8 @@ usersMap: Map<string, User> = new Map();
      // console.log('Le print de userlocal est:' );
      // console.log( this.localUser );
     }
+  }
+
+  updateUser(user: User) {
   }
 }

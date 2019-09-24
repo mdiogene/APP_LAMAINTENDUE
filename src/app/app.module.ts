@@ -21,6 +21,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 // FireBase
 import { firebaseConfig } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 
@@ -50,6 +51,7 @@ import { Device } from '@ionic-native/device/ngx';
     AngularFireAuthModule,
     AngularFirestore,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     Geolocation,
     Device,
     SplashScreen,

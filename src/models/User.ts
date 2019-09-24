@@ -6,6 +6,7 @@ export class User {
     email: string;
     password: string;
     isOnUpdate: boolean;
+    isOnline: boolean;
     urlPicture: string;
     isAdmin: boolean;
 
@@ -16,6 +17,7 @@ export class User {
         this.email = email;
         this.password = password;
         this.isOnUpdate = false;
+        this.isOnline = false;
         this.urlPicture = urlPicture;
         this.isAdmin = isAdmin;
     }
