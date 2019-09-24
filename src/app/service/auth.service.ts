@@ -13,6 +13,8 @@ export class AuthService {
 localUser: User;
 userSubject = new Subject<User>();
 usersMap: Map<string, User> = new Map();
+  usersSubject = new Subject< User[]>();
+  users: User[] = [];
 
   constructor(private AFauth: AngularFireAuth, private router: Router,
               public fs: AngularFirestore) {
@@ -25,9 +27,10 @@ usersMap: Map<string, User> = new Map();
       this.AFauth.auth.signInWithEmailAndPassword(email, password).then(user => {
         resolve(user);
         this.getAllUsers();
-        this.getUserByEmail(email);
-  //      console.log('dans local service user etait :');
-  //    console.log(this.localUser);
+        this.getUserByUserEmail(user.user.email);
+        this.emitUserByEmailSubject();
+        this.localUser.isOnline = true;
+        this.updateUser(this.localUser);
       }).catch(err => rejected(err));
 
     });
@@ -36,6 +39,8 @@ usersMap: Map<string, User> = new Map();
 // partie logout
   logout() {
     this.AFauth.auth.signOut().then(() => {
+      this.localUser.isOnline = false;
+      this.updateUser(this.localUser);
       this.router.navigate(['/']);
     });
   }
@@ -48,6 +53,13 @@ usersMap: Map<string, User> = new Map();
     }
   }
 
+  emitUsersSubject() {
+    if (this.users) {
+      this.usersSubject.next(this.users);
+//        console.log('Le print de userlocal est:' );
+//        console.log( this.localUser );
+    }
+  }
   /*getAllUsers(): void {
     this.fs.collection('Users').get()
         .subscribe(usersDoc => {
@@ -80,6 +92,16 @@ usersMap: Map<string, User> = new Map();
               });
     }
 
+  updateUser(user?: User): void {
+
+    this.fs.collection('Users').doc(user.userId)
+        .set(Object.assign({ name: user.name, isOnline: user.isOnline, email: user.email, userId: user.userId,
+          prenom: user.prenom, password: user.password, isAdmin: user.isAdmin, urlPicture: user.urlPicture}));
+    this.users[this.users.indexOf(user)] = user;
+    this.emitUsersSubject();
+
+  }
+
   getUserByEmail(email: string) {
     if (this.usersMap.has(email)) {
       this.localUser = this.usersMap.get(email);
@@ -87,6 +109,16 @@ usersMap: Map<string, User> = new Map();
       this.emitUserByEmailSubject();
      // console.log('Le print de userlocal est:' );
      // console.log( this.localUser );
+    }
+  }
+
+  getUserByUserEmail(userEmail: string) {
+    if (this.usersMap.has(userEmail)) {
+      this.localUser = this.usersMap.get(userEmail);
+      this.userSubject.next(this.localUser);
+      this.emitUserByEmailSubject();
+      console.log('Le print de userlocal est:' );
+      console.log( this.localUser );
     }
   }
 }

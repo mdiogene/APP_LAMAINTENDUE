@@ -16,19 +16,38 @@
         <ion-title>LMT CHAT</ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content>
     <div class="chat" *ngFor="let chat of chatRef | async">
-        <div class="me" *ngIf="uid == chat.userid">
+        <div *ngIf="chat.userEmail === localUser.email"  class="me ion-align-self-end">
+            {{chat.Name}}
+            <br>
+            <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
+            <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
+            <br>
             {{chat.Message}}
         </div>
 
-        <div class="you" *ngIf="uid != chat.userid">
-            <span class="name">
-            {{ chat.Name}}
-          </span> <br> {{ chat.Message }}
+        <div *ngIf="chat.userEmail !== localUser.email"  class="me ion-align-self-start">
+            {{chat.Name}}
+            <br>
+            <!--<ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>-->
+            <!--<ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>-->
+            <br>
+            {{chat.Message}}
         </div>
     </div>
+
+    <!--<div *ngIf="chat.email === localUser.email" class="you ion-align-self-end">-->
+    <!--<span class="name">-->
+    <!--{{ chat.Name}}-->
+    <!--<br>-->
+    <!--<div *ngIf="chat.email === localUser.email">-->
+    <!--<ion-label>En Ligne : {{localUser.isOnline}} </ion-label>-->
+    <!--</div>-->
+    <!--<br>-->
+    <!--</span> <br> {{ chat.Message }}-->
+    <!--</div>-->
+    <!--</div>-->
 </ion-content>
 <ion-footer>
     <ion-item>
