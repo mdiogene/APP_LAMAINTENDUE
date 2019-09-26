@@ -8,6 +8,7 @@ import { Pages } from './interfaces/pages';
 import {Subscription} from 'rxjs';
 import {User} from '../models/User';
 import {AuthService} from './service/auth.service';
+import {PresenceService} from './service/presence.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent {
   public appPages: Array<Pages>;
   userSubscription: Subscription;
   localUser = new User();
+  localUserIsLogged = new User();
 
   constructor(
     private platform: Platform,
@@ -26,6 +28,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     public navCtrl: NavController,
     private authService: AuthService,
+    private presenceService: PresenceService,
   ) {
     this.appPages = [
       {
@@ -68,9 +71,7 @@ export class AppComponent {
           this.localUser = user;
         }
     );
-
     this.authService.getAllUsers();
-console.log(this.localUser);
     this.initializeApp();
   }
 

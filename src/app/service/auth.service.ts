@@ -5,18 +5,21 @@ import {User} from '../../models/User';
 import {Subject} from 'rxjs';
 import {error} from 'util';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {PresenceService} from './presence.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-localUser: User;
-userSubject = new Subject<User>();
-usersMap: Map<string, User> = new Map();
+  localUser: User;
+  userSubject = new Subject<User>();
+  usersMap: Map<string, User> = new Map();
   usersSubject = new Subject< User[]>();
   users: User[] = [];
-
-  constructor(private AFauth: AngularFireAuth, private router: Router,
+  localUserLogged = new User();
+  constructor(private AFauth: AngularFireAuth,
+              private presenceService: PresenceService,
+              private router: Router,
               public fs: AngularFirestore) {
   }
 
@@ -31,6 +34,10 @@ usersMap: Map<string, User> = new Map();
         this.emitUserByEmailSubject();
         this.localUser.isOnline = true;
         this.updateUser(this.localUser);
+        this.setUser(this.localUser);
+
+        console.log('login: local user logged');
+        console.log(this.localUser);
       }).catch(err => rejected(err));
 
     });
@@ -41,6 +48,7 @@ usersMap: Map<string, User> = new Map();
     this.AFauth.auth.signOut().then(() => {
       this.localUser.isOnline = false;
       this.updateUser(this.localUser);
+      this.setUser(this.localUser);
       this.router.navigate(['/']);
     });
   }
@@ -48,49 +56,33 @@ usersMap: Map<string, User> = new Map();
   emitUserByEmailSubject() {
     if (this.localUser) {
       this.userSubject.next(this.localUser);
-//        console.log('Le print de userlocal est:' );
-//        console.log( this.localUser );
     }
   }
 
   emitUsersSubject() {
     if (this.users) {
       this.usersSubject.next(this.users);
-//        console.log('Le print de userlocal est:' );
-//        console.log( this.localUser );
     }
   }
-  /*getAllUsers(): void {
+
+  getAllUsers(): void {
     this.fs.collection('Users').get()
         .subscribe(usersDoc => {
               usersDoc.forEach(doc => {
-                if (!this.usersMap.has(doc.id)) {
-                  this.usersMap.set(doc.id, <User>doc.data());
-                  // this.users.unshift(<User>doc.data());
+
+                let user: User;
+                user = <User>doc.data();
+                if (!this.usersMap.has(user.email)) {
+                  this.usersMap.set(user.email, <User>doc.data());
+                  this.users.unshift(<User>doc.data());
                 }
               });
+              this.emitUsersSubject();
             },
             () => {
-              console.log('Erreur de suppression' + error);
-            });*/
-   // console.log('Le print de users map est:' );
-    // console.log( this.usersMap );
-
-    getAllUsers(): void {
-      this.fs.collection('Users').get()
-          .subscribe(usersDoc => {
-                usersDoc.forEach(doc => {
-                  let user: User;
-                  user = <User>doc.data();
-                  if (!this.usersMap.has(user.email)) {
-                    this.usersMap.set(user.email, <User>doc.data());
-                  }
-                });
-              },
-              () => {
-                console.log('Erreur' + error);
-              });
-    }
+              console.log('Erreur' + error);
+            });
+  }
 
   updateUser(user?: User): void {
 
@@ -102,23 +94,14 @@ usersMap: Map<string, User> = new Map();
 
   }
 
-  getUserByEmail(email: string) {
-    if (this.usersMap.has(email)) {
-      this.localUser = this.usersMap.get(email);
-      this.userSubject.next(this.localUser);
-      this.emitUserByEmailSubject();
-     // console.log('Le print de userlocal est:' );
-     // console.log( this.localUser );
-    }
-  }
-
   getUserByUserEmail(userEmail: string) {
     if (this.usersMap.has(userEmail)) {
       this.localUser = this.usersMap.get(userEmail);
       this.userSubject.next(this.localUser);
       this.emitUserByEmailSubject();
-      console.log('Le print de userlocal est:' );
-      console.log( this.localUser );
     }
+  }
+  setUser(user: User) {
+    this.localUserLogged = user;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private router: Router
   ) { }
- 
+
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
   }
