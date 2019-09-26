@@ -12,7 +12,7 @@
             {{chat.Name}}
             <br>
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
-            <ion-label *ngIf="! localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
+            <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <br>
             {{chat.Message}}
         </div>
