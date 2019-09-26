@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import {AuthService} from '../../service/auth.service';
 import {User} from '../../../models/User';
 import {Subscription} from 'rxjs';
-import {PresenceService} from '../../service/presence.service';
 
 @Component({
   selector: 'app-chat',

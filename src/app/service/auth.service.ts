@@ -5,7 +5,6 @@ import {User} from '../../models/User';
 import {Subject} from 'rxjs';
 import {error} from 'util';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {PresenceService} from './presence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,6 @@ export class AuthService {
   users: User[] = [];
   localUserLogged = new User();
   constructor(private AFauth: AngularFireAuth,
-              private presenceService: PresenceService,
               private router: Router,
               public fs: AngularFirestore) {
   }
