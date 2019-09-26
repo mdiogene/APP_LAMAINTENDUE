@@ -59,6 +59,7 @@ export class AuthService {
     }
   }
 
+
   emitUsersSubject() {
     if (this.users) {
       this.usersSubject.next(this.users);
@@ -87,10 +88,29 @@ export class AuthService {
   updateUser(user?: User): void {
 
     this.fs.collection('Users').doc(user.userId)
-        .set(Object.assign({ name: user.name, isOnline: user.isOnline, email: user.email, userId: user.userId,
-          prenom: user.prenom, password: user.password, isAdmin: user.isAdmin, urlPicture: user.urlPicture}));
+        .set(Object.assign({
+          name: user.name, isOnline: user.isOnline, email: user.email, userId: user.userId,
+          prenom: user.prenom, password: user.password, isAdmin: user.isAdmin, urlPicture: user.urlPicture
+        }));
     this.users[this.users.indexOf(user)] = user;
     this.emitUsersSubject();
+
+  /*  getAllUsers(): void {
+      this.fs.collection('Users').get()
+          .subscribe(usersDoc => {
+                usersDoc.forEach(doc => {
+                  let user: User;
+                  user = <User>doc.data();
+                  if (!this.usersMap.has(user.email)) {
+                    this.usersMap.set(user.email, <User>doc.data());
+                  }
+                });
+              },
+              () => {
+                console.log('Erreur' + error);
+              })
+  };*/
+
 
   }
 
@@ -101,6 +121,7 @@ export class AuthService {
       this.emitUserByEmailSubject();
     }
   }
+
   setUser(user: User) {
     this.localUserLogged = user;
   }

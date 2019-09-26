@@ -44,6 +44,7 @@ export class ChatPage implements OnInit, OnDestroy {
     }
   }
 
+
   ngOnInit() {
 
     this.uid = localStorage.getItem('uid');
