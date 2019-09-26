@@ -1,25 +1,13 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-<<<<<<< HEAD
-import { AngularFireDatabase } from '@angular/fire/database';
-import { first, map, switchMap, tap } from 'rxjs/operators';
-import * as firebase from 'firebase';
-import {of, Subject} from 'rxjs';
-import {User} from '../../models/User';
-=======
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { first, timestamp, map, switchMap, tap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { of } from 'rxjs';
->>>>>>> e1f026bc6cd898355e6e88d69ae65b5d6503e485
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PresenceService {
-<<<<<<< HEAD
   localUser: User;
   userLoggedSubject = new Subject<User>();
   // updateOnAway: any;
@@ -80,7 +68,7 @@ export class PresenceService {
   // }
 
 // }
-=======
+
  // updateOnUser: any;
 //  updateOnDisconnect: any;
   updateOnAway: any;
@@ -130,4 +118,4 @@ export class PresenceService {
   }
 
 }
->>>>>>> e1f026bc6cd898355e6e88d69ae65b5d6503e485
+
