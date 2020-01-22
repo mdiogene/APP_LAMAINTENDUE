@@ -50,10 +50,22 @@ export class AppComponent {
         icon: 'calendar'
       },
       {
+        title: 'besoin',
+        url: '/besoin',
+        direct: 'forward',
+        icon: 'basket'
+      },
+      {
         title: 'lmt Geolok',
         url: '/geoloc',
         direct: 'forward',
         icon: 'locate',
+      },
+      {
+        title: 'Urence',
+        url: '/urgence',
+        direct: 'forward',
+        icon: 'warning',
       },
 
      /* {
