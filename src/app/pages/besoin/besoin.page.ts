@@ -12,4 +12,8 @@ export class BesoinPage implements OnInit {
   ngOnInit() {
   }
 
+ addDon() {
+   
+ }
+  
 }
