@@ -6,7 +6,6 @@ import {AuthService} from '../../service/auth.service';
 import {User} from '../../../models/User';
 import {Subscription} from 'rxjs';
 import { Platform, LoadingController } from '@ionic/angular';
-import {ShareimgService} from '../../service/shareimg.service';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
