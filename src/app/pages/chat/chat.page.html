@@ -13,8 +13,7 @@
             <br>
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
-            <br>
-            {{chat.Message}}
+            <br> {{chat.Message}}
         </div>
 
         <div *ngIf="chat.userEmail === localUserIsLogged.email" class="me ion-align-self-end">
@@ -22,8 +21,7 @@
             <br>
             <ion-label *ngIf="localUserIsLogged.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUserIsLogged.isOnline">En Ligne : {{'Offline'}}</ion-label>
-            <br>
-            {{chat.Message}}
+            <br> {{chat.Message}}
         </div>
     </div>
 
@@ -34,6 +32,9 @@
         <ion-input placeholder="Type..." [(ngModel)]="text"></ion-input>
         <ion-button (click)="send()" fill="clear" icon-only slot="end">
             <ion-icon name="send"></ion-icon>
+        </ion-button>
+        <ion-button (click)="selectImage()" fill="clear" icon-only slot="start">
+            <ion-icon name="add-circle"></ion-icon>
         </ion-button>
     </ion-item>
 </ion-footer>
