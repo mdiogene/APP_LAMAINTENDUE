@@ -100,11 +100,17 @@ export class ChatPage implements OnInit, OnDestroy {
         Timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
       this.text = '';
+      this.scrollToBottomOnInit();
     }
   }
 
   ionViewDidEnter() {
     this.content.scrollToBottom(-1);
+  }
+
+  scrollToBottomOnInit() {
+    this.content.scrollToBottom(-1);
+
   }
 
   ngOnInit() {
