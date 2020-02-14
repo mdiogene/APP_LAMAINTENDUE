@@ -6,7 +6,7 @@
         <ion-title>LMT CHAT</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content #content>
     <div class="chat" *ngFor="let chat of chatRef | async">
         <div *ngIf="chat.userEmail !== localUserIsLogged.email" class="me ion-align-self-start">
             {{chat.Name}}
@@ -30,11 +30,13 @@
 <ion-footer>
     <ion-item>
         <ion-input placeholder="Type..." [(ngModel)]="text"></ion-input>
+        <div>{{returnpath}}</div>
         <ion-button (click)="send()" fill="clear" icon-only slot="end">
             <ion-icon name="send"></ion-icon>
         </ion-button>
-        <ion-button (click)="selectImage()" fill="clear" icon-only slot="start">
+        <ion-button (click)="fileInput.click()" fill="clear" icon-only slot="start">
             <ion-icon name="add-circle"></ion-icon>
         </ion-button>
+        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;" />
     </ion-item>
 </ion-footer>

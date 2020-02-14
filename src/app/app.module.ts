@@ -36,6 +36,8 @@ import { File } from '@ionic-native/file/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import {Camera} from '@ionic-native/camera/ngx';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import {Camera} from '@ionic-native/camera/ngx';
     AngularFirestore,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    AngularFireStorage,
     Geolocation,
     Device,
     File,
@@ -67,6 +70,7 @@ import {Camera} from '@ionic-native/camera/ngx';
     IonContent,
     Camera,
     SplashScreen,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
