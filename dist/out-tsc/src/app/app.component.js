@@ -11,12 +11,18 @@ import { Component } from '@angular/core';
 import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { User } from '../models/User';
+import { AuthService } from './service/auth.service';
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, navCtrl) {
+    // localUserIsLogged = new User();
+    function AppComponent(platform, splashScreen, statusBar, navCtrl, authService) {
+        var _this = this;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.navCtrl = navCtrl;
+        this.authService = authService;
+        this.localUser = new User();
         this.appPages = [
             {
                 title: 'Home',
@@ -36,7 +42,29 @@ var AppComponent = /** @class */ (function () {
                 direct: 'forward',
                 icon: 'calendar'
             },
+            {
+                title: 'besoin',
+                url: '/besoin',
+                direct: 'forward',
+                icon: 'basket'
+            },
+            {
+                title: 'lmt Geolok',
+                url: '/geoloc',
+                direct: 'forward',
+                icon: 'locate',
+            },
+            {
+                title: 'Urence',
+                url: '/urgence',
+                direct: 'forward',
+                icon: 'warning',
+            },
         ];
+        this.userSubscription = this.authService.userSubject.subscribe(function (user) {
+            _this.localUser = user;
+        });
+        this.authService.getAllUsers();
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {
@@ -49,8 +77,10 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.goToEditProgile = function () {
         this.navCtrl.navigateForward('edit-profile');
     };
-    AppComponent.prototype.logout = function () {
+    AppComponent.prototype.Onlogout = function () {
         this.navCtrl.navigateRoot('/');
+        // tslint:disable-next-line:no-unused-expression
+        this.authService.logout();
     };
     AppComponent = __decorate([
         Component({
@@ -61,7 +91,8 @@ var AppComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Platform,
             SplashScreen,
             StatusBar,
-            NavController])
+            NavController,
+            AuthService])
     ], AppComponent);
     return AppComponent;
 }());
