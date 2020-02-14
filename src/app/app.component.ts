@@ -42,24 +42,11 @@ export class AppComponent {
         direct: 'forward',
         icon: 'chatbubbles'
       },
-
-      {
-        title: 'Calendar',
-        url: '/calendar',
-        direct: 'forward',
-        icon: 'calendar'
-      },
       {
         title: 'besoin',
         url: '/besoin',
         direct: 'forward',
         icon: 'basket'
-      },
-      {
-        title: 'lmt Geolok',
-        url: '/geoloc',
-        direct: 'forward',
-        icon: 'locate',
       },
       {
         title: 'Urence',
