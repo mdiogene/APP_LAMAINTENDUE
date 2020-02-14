@@ -6,15 +6,14 @@
         <ion-title>LMT CHAT</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content #content>
     <div class="chat" *ngFor="let chat of chatRef | async">
         <div *ngIf="chat.userEmail !== localUserIsLogged.email" class="me ion-align-self-start">
             {{chat.Name}}
             <br>
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
-            <br>
-            {{chat.Message}}
+            <br> {{chat.Message}}
         </div>
 
         <div *ngIf="chat.userEmail === localUserIsLogged.email" class="me ion-align-self-end">
@@ -22,8 +21,7 @@
             <br>
             <ion-label *ngIf="localUserIsLogged.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUserIsLogged.isOnline">En Ligne : {{'Offline'}}</ion-label>
-            <br>
-            {{chat.Message}}
+            <br> {{chat.Message}}
         </div>
     </div>
 
@@ -32,8 +30,13 @@
 <ion-footer>
     <ion-item>
         <ion-input placeholder="Type..." [(ngModel)]="text"></ion-input>
+        <div>{{returnpath}}</div>
         <ion-button (click)="send()" fill="clear" icon-only slot="end">
             <ion-icon name="send"></ion-icon>
         </ion-button>
+        <ion-button (click)="fileInput.click()" fill="clear" icon-only slot="start">
+            <ion-icon name="add-circle"></ion-icon>
+        </ion-button>
+        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;" />
     </ion-item>
 </ion-footer>
