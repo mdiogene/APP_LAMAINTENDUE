@@ -115,6 +115,7 @@ export class ChatPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ionViewDidEnter();
+    this.scrollToBottomOnInit();
     this.uid = localStorage.getItem('uid');
     this.chatRef =  this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
     this.actualUser = this.getUserInfo(this.uid);
