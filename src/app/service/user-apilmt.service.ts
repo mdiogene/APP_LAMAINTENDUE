@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import {apiLMT} from '../../environments/environment';
 import {AlertService} from './alert-service.service';
 import {LoadingService} from './loading-service.service';
+import {UserAPILMT} from '../../models/UserAPILMT';
 
 @Injectable({
   providedIn: 'root'
@@ -18,65 +19,93 @@ export class UserApilmtService {
   users: User[] = [];
   user = new User();
   userByEmail: User;
-
-  // usersSubject = new Subject<User[]>();
-  // roleIdSubject = new Subject<number>();
-  userSubject = new Subject<User>();
+    userSubject = new Subject<User>();
   userByEmailSubject = new Subject<User>();
-  // userRoleEnregistre: UserRole;
-  // userRoles: UserRole[] = [];
-  // role: Role;
-  // userRolesSubject = new Subject<UserRole[]>();
+    userAPILMTSubject = new Subject<UserAPILMT>();
+    usersAPILMTSubject =  new Subject<UserAPILMT[]>();
+    userFromAPI: UserAPILMT;
+    usersFromAPI: UserAPILMT[] = [];
 
-  constructor(private http: HttpClient,
+    constructor(private http: HttpClient,
               public loadingService: LoadingService,
               public alertService: AlertService) { }
 
 
-  emitUserSubject() {
-    this.userSubject.next(this.user);
+  emitUserAPILMTSubject() {
+    this.userAPILMTSubject.next(this.userFromAPI);
    this.loadingService.hideLoading();
   }
 
-  emitUserByEmailSubject() {
+    emitUsersAPILMTSubject() {
+        this.usersAPILMTSubject.next(this.usersFromAPI);
+        this.loadingService.hideLoading();
+    }
+    emitUserSubject() {
+        this.userSubject.next(this.user);
+        this.loadingService.hideLoading();
+    }
+
+    emitUserByEmailSubject() {
     this.userByEmailSubject.next(this.userByEmail);
    this.loadingService.hideLoading();
   }
 
-  getUserByEmail(email: string): void {
+
+    getAllUsersAPILMT(): void {
+        this.loadingService.showLoading();
+        this.http.get<any>(this.userAPILMTUrl).subscribe(
+            next => {
+                const users = next._embedded.users;
+                if (users && users.length > 0) {
+                    this.usersFromAPI = next._embedded.users;
+                }
+                this.emitUsersAPILMTSubject();
+            },
+            error => {
+                console.log(error);
+                this.handleError(error);
+            }
+        );
+    }
+
+  getUserByEmail(email: string): UserAPILMT {
    this.loadingService.showLoading();
     this.userByEmail = null;
     if (email) {
-      this.http.get<User>(this.userAPILMTUrl + '/search/findByEmail?email=' + email).subscribe(
+      this.http.get<UserAPILMT>(this.userAPILMTUrl + '/search/findByEmail?email=' + email).subscribe(
           next => {
             if (next) {
-              this.userByEmail = next;
+              this.userFromAPI = next;
             }
-            this.emitUserByEmailSubject();
+            this.emitUserAPILMTSubject();
           },
           error => {
             this.handleError(error);
           }
       );
     }
+    return this.userFromAPI;
   }
 
-  getUserByFirebaseId(firebaseId: string): void {
+  getUserByFirebaseId(firebaseId: string): UserAPILMT {
     this.loadingService.showLoading();
     this.userByEmail = null;
     if (firebaseId) {
-      this.http.get<User>(this.userAPILMTUrl + '/search/findByUserId?userId=' + firebaseId).subscribe(
+      this.http.get<UserAPILMT>(this.userAPILMTUrl + '/search/findByUserId?userId=' + firebaseId).subscribe(
           next => {
             if (next) {
-              this.user = next;
+              // this.user = next;
+              this.userFromAPI = next;
+                return this.userFromAPI;
             }
-            this.emitUserSubject();
+            this.emitUserAPILMTSubject();
           },
           error => {
             this.handleError(error);
           }
       );
     }
+    return;
   }
 
 
