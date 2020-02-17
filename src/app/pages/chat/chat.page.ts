@@ -6,8 +6,6 @@ import {AuthService} from '../../service/auth.service';
 import {User} from '../../../models/User';
 import {Observable, Subscription} from 'rxjs';
 import {Platform, LoadingController} from '@ionic/angular';
-import {Camera, CameraOptions} from '@ionic-native/camera';
-import {ActionSheetController} from '@ionic/angular';
 import {FileChooser} from '@ionic-native/file-chooser/ngx';
 import {FilePath} from '@ionic-native/file-path/ngx';
 import {File} from '@ionic-native/file/ngx';
@@ -29,83 +27,6 @@ import {finalize} from 'rxjs/operators';
     styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit, OnDestroy {
-
-<<<<<<< HEAD
-  @ViewChild('content') content: IonContent;
-  /* public options = {
-    sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-    mediaType: Camera.MediaType.ALLMEDIA,
-    destinationType: Camera.DestinationType.FILE_URI
-  };
-  public Fbref: any; */
-  text: string;
-  chatRef: any;
-  uid: string;
-  userSubscription: Subscription;
-  localUser = new User();
-  users: User[] = [];
-  usersSubscription: Subscription;
-  actualUser = new User();
-  localUserIsLogged = new User();
-  platform: any;
-  returnpath: string;
-  uploadProgress: number;
-  nativepath: any;
-  firestore = firebase.storage();
-  Ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-
-
-
-  constructor(public af: AngularFireAuth,  private authService: AuthService, public fs: AngularFirestore,
-    public storage: AngularFireStorage,
-    public LoadCtrl: LoadingController, public fc: FileChooser, public fp: FilePath, public platforme: Platform,
-    public splashScreen: SplashScreen, private statusbar: StatusBar, public file: File) {
-    this.uid = localStorage.getItem('uid');
-
-    this.chatRef =  this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
-    this.actualUser = this.getUserInfo(this.uid);
- //   this.Fbref = firebase.storage().ref();
-
-  }
-
-  getPhoto(event) {
-    const id = Math.random().toString(36).substring(2);
-    this.Ref = this.storage.ref(id);
-    this.task = this.Ref.put(event.target.files[0]);
-  }
- /* getPhoto() {
-    Camera.getPicture(this.options).then(fileuri => {
-      window.resolveLocalFileSystemURL('file://' + fileuri, FE => {
-        FE.file((file: Blob) => {
-          const FR = new FileReader();
-          FR.onloadend = (res: any) => {
-            const AF = res.target.result;
-            const blob = new Blob([new Uint8Array(AF)], {type: 'video/mp4'});
-            this.upload(blob);
-          };
-          FR.readAsArrayBuffer(file);
-        });
-      });
-    });
-  } */
- /* upload(blob: Blob) {
-    this.Fbref.child('vid').put(blob);
-   // this.firestore.ref('files/').child('vid').put(blob);
-   alert('ok');
-  }*/
-  send() {
-    if (this.text !== '') {
-      this.fs.collection('chats').add({
-        Name: this.af.auth.currentUser.displayName,
-        Message: this.text,
-        userId: this.af.auth.currentUser.uid,
-        userEmail : this.af.auth.currentUser.email,
-        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      this.text = '';
-      this.scrollToBottomOnInit();
-=======
     @ViewChild('content') content: IonContent;
 
     text: string;
@@ -153,10 +74,10 @@ export class ChatPage implements OnInit, OnDestroy {
         // this.actualUser = this.getUserInfo(this.uid);
         //   this.Fbref = firebase.storage().ref();
         // this.getAllNamesAndChats(this.chatRef);
->>>>>>> chatsendfile
+
     }
 
-<<<<<<< HEAD
+
   ionViewDidEnter() {
     this.content.scrollToBottom(-1);
   }
@@ -165,14 +86,6 @@ export class ChatPage implements OnInit, OnDestroy {
     this.content.scrollToBottom(-1);
 
   }
-
-  ngOnInit() {
-    this.ionViewDidEnter();
-    this.scrollToBottomOnInit();
-    this.uid = localStorage.getItem('uid');
-    this.chatRef =  this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
-    this.actualUser = this.getUserInfo(this.uid);
-=======
     getPhoto(event) {
         const id = Math.random().toString(36).substring(2);
         this.Ref = this.storage.ref(id);
@@ -186,7 +99,7 @@ export class ChatPage implements OnInit, OnDestroy {
         console.log(this.urlTest);
 
     }
->>>>>>> chatsendfile
+
 
     send() {
         if (this.text !== '') {
@@ -217,17 +130,8 @@ export class ChatPage implements OnInit, OnDestroy {
             });
             this.content.scrollToBottom();
     }
-
-<<<<<<< HEAD
-    this.localUserIsLogged = this.authService.localUser;
-  }
-=======
-    scrollToBottomOnInit() {
-        this.content.scrollToBottom(300);
-    }
->>>>>>> chatsendfile
-
     ngOnInit() {
+        this.ionViewDidEnter();
         this.scrollToBottomOnInit();
         this.uid = localStorage.getItem('uid');
         // this.getUserConnectedWithAPILMT(this.uid);
