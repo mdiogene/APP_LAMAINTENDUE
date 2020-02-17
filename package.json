@@ -35,6 +35,7 @@
     "@ionic-native/status-bar": "^5.20.0",
     "@ionic/angular": "^4.6.0",
     "@ionic/pro": "2.0.4",
+    "angular-particle": "^1.0.4",
     "cordova-android": "8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-ios": "5.0.1",
@@ -47,6 +48,7 @@
     "firebase": "^7.8.1",
     "ionic2-calendar": "^0.5.2",
     "ionicons": "4.5.5",
+    "particlesjs": "^2.2.3",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },

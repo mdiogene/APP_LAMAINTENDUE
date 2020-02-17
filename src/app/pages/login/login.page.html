@@ -1,106 +1,74 @@
-<ion-content padding class="animated fadeIn login auth-page">
-    <div class="theme-bg"></div>
-    <div class="auth-content">
+<!--<ion-content padding class="animated fadeIn login auth-page">
+        <div class="theme-bg"></div>
+        <div class="auth-content">
+            <div padding-horizontal text-center class="animated fadeInDown">
+                <div class="logo"></div>
+                <h4 no-margin>
+                    <ion-text color="light" class="fw700">
+                        La Main Tendue
+                    </ion-text>
+                </h4>
+            </div>
+            <ion-item>
+                <ion-label position="floating">email</ion-label>
+                <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+            </ion-item>
 
-        <!-- Logo -->
-        <div padding-horizontal text-center class="animated fadeInDown">
-            <div class="logo"></div>
-            <h4 no-margin>
-                <ion-text color="light" class="fw700">
-                    La Main Tendue
-                </ion-text>
-            </h4>
+            <ion-item>
+                <ion-label position="floating">password</ion-label>
+                <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+            </ion-item>
+            <br>
+            <ion-button (click)="OnSubmitLogin()" expand="block">confirmer</ion-button>
         </div>
+    </ion-content>-->
+<ion-content>
+    <div id="container">
+        <div class="d-flex justify-content-center h-100 ">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="assets/img/mnt.png" class="brand_logo" alt="Logo">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center form_container">
+                    <form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="" class="form-control input_user" name="email" [(ngModel)]="email" placeholder="email">
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" name="" class="form-control input_pass" name="password" [(ngModel)]="password" placeholder="password">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                <label class="custom-control-label" for="customControlInline">se souvenir de moi!</label>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button type="submit" (click)="OnSubmitLogin()" name="button" class="btn login_btn">Login</button>
+                        </div>
+                    </form>
+                </div>
 
-        <!-- Login form -->
-        <ion-item>
-            <ion-label position="floating">email</ion-label>
-            <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
-        </ion-item>
+                <!--<div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        <a id="links" href="#">Mot de passe oublié?</a>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</ion-content>
 
-        <ion-item>
-            <ion-label position="floating">password</ion-label>
-            <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-        </ion-item>
-        <br>
-        <ion-button (click)="OnSubmitLogin()" expand="block">confirmer</ion-button>
-
-        <!--<form [formGroup]="onLoginForm" class="list-form">
-    <ion-item no-padding class="animated fadeInUp">
-      <ion-label position="floating">
-        <ion-icon name="mail" item-start></ion-icon>
-        Email
-      </ion-label>
-      <ion-input color="secondary" type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
-      <ion-text color="warning">
-        Required Field
-      </ion-text>
-    </p>
-
-    <ion-item no-padding class="animated fadeInUp">
-      <ion-label position="floating">
-        <ion-icon name="lock" item-start></ion-icon>
-        Password
-      </ion-label>
-      <ion-input color="secondary" type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
-      <ion-text color="warning">
-        Required Field
-      </ion-text>
-      </p>
-  </form>
-
-  <p text-right tappable (click)="forgotPass()" class="paz">
+<!--<p text-right tappable (click)="forgotPass()" class="paz">
     <ion-text color="light">
       <strong>Forgot Pass?</strong>
     </ion-text>
-  </p>
-
-  <div>
-    <ion-button icon-left size="medium" expand="full" shape="round" color="dark" (click)="goToHome()" [disabled]="!onLoginForm.valid" tappable>
-      <ion-icon name="log-in"></ion-icon>
-      Signin
-    </ion-button>
-
-    <p text-center>
-      <ion-text color="light">
-        Or Signin with:
-      </ion-text>
-    </p>
-
-    <ion-grid class="btn-group">
-      <ion-row>
-        <ion-col size="4">
-          <ion-button shape="round" expand="full" color="secondary">
-            <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button shape="round" expand="full" color="secondary">
-            <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
-          </ion-button>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button shape="round" expand="full" color="secondary">
-            <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-  </div>-->
-
-        <!-- Other links -->
-        <!----<div text-center margin-top>
-          <span (click)="goToRegister()" class="paz" tappable>
-      <ion-text color="light">
-        New here? <strong>Sign Up</strong>
-      </ion-text>
-    </span>
-      </div>-->
-
-    </div>
-</ion-content>
+  </p>-->

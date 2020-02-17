@@ -23,6 +23,8 @@
             <ion-label *ngIf="!localUserIsLogged.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <br> {{chat.Message}}
         </div>
+        <div *ngIf="downloadURL | async; let downloadSrc"> file Upload: <a [href]="downloadSrc">{{downloadSrc}}</a>
+        </div>
     </div>
 
 

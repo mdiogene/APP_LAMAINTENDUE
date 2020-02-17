@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import * as firebase from 'firebase';
 import {AuthService} from '../../service/auth.service';
 import {User} from '../../../models/User';
-import {Subscription} from 'rxjs';
+import {Subscription, Observable} from 'rxjs';
 import { Platform, LoadingController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from '@ionic/angular';
@@ -16,7 +16,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask} from '@angular/fire/storage';
 import { ViewChild } from '@angular/core';
 import { IonContent} from '@ionic/angular';
-// import { Content } from '@angular/compiler/src/render3/r3_ast';
+import {finalize} from 'rxjs/operators';
 
 
 
@@ -50,7 +50,7 @@ export class ChatPage implements OnInit, OnDestroy {
   firestore = firebase.storage();
   Ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
-
+  downloadURL: Observable<string>;
 
 
   constructor(public af: AngularFireAuth,  private authService: AuthService, public fs: AngularFirestore,
@@ -69,32 +69,30 @@ export class ChatPage implements OnInit, OnDestroy {
     const id = Math.random().toString(36).substring(2);
     this.Ref = this.storage.ref(id);
     this.task = this.Ref.put(event.target.files[0]);
+    this.task.snapshotChanges().pipe(
+      finalize(() => this.downloadURL = this.Ref.getDownloadURL())
+    ).subscribe();
   }
- /* getPhoto() {
-    Camera.getPicture(this.options).then(fileuri => {
-      window.resolveLocalFileSystemURL('file://' + fileuri, FE => {
-        FE.file((file: Blob) => {
-          const FR = new FileReader();
-          FR.onloadend = (res: any) => {
-            const AF = res.target.result;
-            const blob = new Blob([new Uint8Array(AF)], {type: 'video/mp4'});
-            this.upload(blob);
-          };
-          FR.readAsArrayBuffer(file);
-        });
-      });
-    });
-  } */
- /* upload(blob: Blob) {
-    this.Fbref.child('vid').put(blob);
-   // this.firestore.ref('files/').child('vid').put(blob);
-   alert('ok');
-  }*/
+
   send() {
     if (this.text !== '') {
       this.fs.collection('chats').add({
         Name: this.af.auth.currentUser.displayName,
         Message: this.text,
+        userId: this.af.auth.currentUser.uid,
+        userEmail : this.af.auth.currentUser.email,
+        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      this.text = '';
+      this.scrollToBottomOnInit();
+    }
+  }
+
+  sendUrlPicture(urlPicture: Observable<string>) {
+    if (this.text !== '') {
+      this.fs.collection('chats').add({
+        Name: this.af.auth.currentUser.displayName,
+        urlPicture: urlPicture,
         userId: this.af.auth.currentUser.uid,
         userEmail : this.af.auth.currentUser.email,
         Timestamp: firebase.firestore.FieldValue.serverTimestamp()
