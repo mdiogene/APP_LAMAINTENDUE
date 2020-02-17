@@ -21,6 +21,7 @@ import {Chat} from '../../../models/Chat';
 import {finalize} from 'rxjs/operators';
 
 
+
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.page.html',
@@ -75,8 +76,23 @@ export class ChatPage implements OnInit, OnDestroy {
         //   this.Fbref = firebase.storage().ref();
         // this.getAllNamesAndChats(this.chatRef);
 
+
     }
 
+
+ /* sendUrlPicture(urlPicture: Observable<string>) {
+    if (this.text !== '') {
+      this.fs.collection('chats').add({
+        Name: this.af.auth.currentUser.displayName,
+        urlPicture: urlPicture,
+        userId: this.af.auth.currentUser.uid,
+        userEmail : this.af.auth.currentUser.email,
+        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      this.text = '';
+      this.scrollToBottomOnInit();
+    }
+  }*/
 
   ionViewDidEnter() {
     this.content.scrollToBottom(-1);

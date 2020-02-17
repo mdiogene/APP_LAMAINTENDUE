@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { ParticlesConfig } from '../../../particles-config';
+import { ParticlesModule } from 'angular-particle';
+
+declare const particlesJS: any;
 
 @Component({
   selector: 'app-login',
@@ -13,6 +17,10 @@ export class LoginPage implements OnInit {
   email: string;
   password: string;
   public onLoginForm: FormGroup;
+  myStyle: object = {};
+    myParams: object = {};
+    width:  100;
+    height = 100;
 
   constructor(
     public navCtrl: NavController,
@@ -22,14 +30,17 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public particlesNs: ParticlesModule
   ) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+
   }
 
   ngOnInit() {
+    this.invokeParticles();
 
 
     /*this.onLoginForm = this.formBuilder.group({
@@ -101,5 +112,8 @@ export class LoginPage implements OnInit {
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
   }
-
+  public invokeParticles() {
+    particlesJS('particles-js', ParticlesConfig, function() {});
+    console.log('ParticlesConfig is loaded');
+  }
 }

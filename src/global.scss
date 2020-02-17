@@ -25,9 +25,10 @@ ion-item {
     background-color: var(--ion-color-dark);
 }
 
-.bg-primary {
+
+/*.bg-primary {
     background-color: var(--ion-color-primary);
-}
+}*/
 
 .bg-secondary {
     background-color: var(--ion-color-secondary);
@@ -110,7 +111,7 @@ ion-toolbar.user-profile {
 // Custom toolbar (overriding Shadow DOM)
 ion-toolbar {
     &.ion-color-primary {
-        --ion-color-base: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary)) !important;
+        //   --ion-color-base: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary)) !important;
     }
 }
 
@@ -123,7 +124,7 @@ ion-card {
 
 // style for auth pages
 .auth-page {
-    background-image: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
+    // background-image: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
     .grid {
         padding: 0;
         .col {
@@ -144,6 +145,7 @@ ion-card {
     }
     .auth-content {
         margin: 0 5%;
+        padding-top: 5rem;
         .logo {
             width: 60px;
             height: 60px;

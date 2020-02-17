@@ -5,19 +5,19 @@
 
 :root {
     /** primary **/
-    --ion-color-primary: #31a6d4;
-    --ion-color-primary-rgb: 47, 50, 160;
+    // --ion-color-primary: #31a6d4;
+    //  --ion-color-primary-rgb: 47, 50, 160;
     --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #272983;
-    --ion-color-primary-tint: #5457B1;
+    //  --ion-color-primary-contrast-rgb: 255, 255, 255;
+    // --ion-color-primary-shade: #272983;
+    //   --ion-color-primary-tint: #5457B1;
     /** secondary **/
-    --ion-color-secondary: #5b5fde;
-    --ion-color-secondary-rgb: 91, 95, 222;
+    //   --ion-color-secondary: #5b5fde;
+    // --ion-color-secondary-rgb: 91, 95, 222;
     --ion-color-secondary-contrast: #ffffff;
     --ion-color-secondary-contrast-rgb: 255, 255, 255;
-    --ion-color-secondary-shade: #4B4EB6;
-    --ion-color-secondary-tint: #787CE4;
+    //  --ion-color-secondary-shade: #4B4EB6;
+    //  --ion-color-secondary-tint: #787CE4;
     /** tertiary **/
     --ion-color-tertiary: #f4a942;
     --ion-color-tertiary-rgb: 244, 169, 66;
@@ -46,25 +46,25 @@
     --ion-color-danger-contrast-rgb: 255, 255, 255;
     --ion-color-danger-shade: #d83636;
     --ion-color-danger-tint: #f65050;
-    /** light **/
+    /** light - page afficher qd on est logedin **/
     --ion-color-light: #f4f4f4;
     --ion-color-light-rgb: 244, 244, 244;
-    --ion-color-light-contrast: #000;
+    //  --ion-color-light-contrast: #000;
     --ion-color-light-contrast-rgb: 0, 0, 0;
-    --ion-color-light-shade: #8290e0;
+    //  --ion-color-light-shade: #8290e0;
     --ion-color-light-tint: #f5f5f5;
-    /** medium **/
-    --ion-color-medium: #ccd1e1;
+    /** medium- nom utiliseurs **/
+    --ion-color-medium: #000;
     --ion-color-medium-rgb: 152, 154, 162;
     --ion-color-medium-contrast: #000;
     --ion-color-medium-contrast-rgb: 0, 0, 0;
     --ion-color-medium-shade: #86888f;
     --ion-color-medium-tint: #a2a4ab;
     /** dark **/
-    --ion-color-dark: rgb(25, 199, 230);
+    // --ion-color-dark: rgb(25, 199, 230);
     --ion-color-dark-rgb: 34, 34, 34;
     --ion-color-dark-contrast: #fff;
     --ion-color-dark-contrast-rgb: 255, 255, 255;
-    --ion-color-dark-shade: #190e60;
-    --ion-color-dark-tint: #2e256d;
+    //  --ion-color-dark-shade: #190e60;
+    //  --ion-color-dark-tint: #2e256d;
 }
