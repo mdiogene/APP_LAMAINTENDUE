@@ -14,8 +14,12 @@ export class AuthService {
   userSubject = new Subject<User>();
   usersMap: Map<string, User> = new Map();
   usersSubject = new Subject< User[]>();
+  usersMapConnectedSubject = new Subject<Map<string, User>>();
   users: User[] = [];
   localUserLogged = new User();
+  usersMapConnected: Map<string, User> = new Map();
+
+
   constructor(private AFauth: AngularFireAuth,
               private router: Router,
               public fs: AngularFirestore) {
@@ -30,12 +34,8 @@ export class AuthService {
         this.getAllUsers();
         this.getUserByUserEmail(user.user.email);
         this.emitUserByEmailSubject();
-        this.localUser.isOnline = true;
         this.updateUser(this.localUser);
         this.setUser(this.localUser);
-
-        console.log('login: local user logged');
-        console.log(this.localUser);
       }).catch(err => rejected(err));
 
     });
@@ -61,6 +61,12 @@ export class AuthService {
   emitUsersSubject() {
     if (this.users) {
       this.usersSubject.next(this.users);
+    }
+  }
+
+  emitUsersMapSubject() {
+    if (this.usersMapConnected) {
+      this.usersMapConnectedSubject.next(this.usersMapConnected);
     }
   }
 
