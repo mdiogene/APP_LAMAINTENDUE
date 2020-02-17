@@ -73,11 +73,11 @@ export class ChatPage implements OnInit, OnDestroy {
     }
 
   ionViewDidEnter() {
-    this.content.scrollToBottom(-1);
+    this.content.scrollToBottom(1);
   }
 
   scrollToBottomOnInit() {
-    this.content.scrollToBottom(-1);
+    this.content.scrollToBottom(1);
 
   }
     getPhoto(event) {
@@ -108,6 +108,8 @@ export class ChatPage implements OnInit, OnDestroy {
             });
             this.text = '';
             this.content.scrollToBottom();
+            this.ionViewDidEnter();
+
         }
 
     }
@@ -123,7 +125,9 @@ export class ChatPage implements OnInit, OnDestroy {
                 Timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             this.content.scrollToBottom();
+            this.ionViewDidEnter();
     }
+
     ngOnInit() {
         this.ionViewDidEnter();
         this.scrollToBottomOnInit();
