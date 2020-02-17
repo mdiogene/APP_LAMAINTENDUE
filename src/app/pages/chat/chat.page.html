@@ -6,7 +6,7 @@
         <ion-title>LMT CHAT</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content #content>
+<ion-content #content [scrollEvents]="true">
     <div class="chat" *ngFor="let chat of chatRef | async">
         <div *ngIf="chat.userEmail !== localUserIsLogged.email" class="me ion-align-self-start">
             {{chat.Name}}

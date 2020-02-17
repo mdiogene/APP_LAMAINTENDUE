@@ -17,6 +17,9 @@ var routes = [
     { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
     { path: 'chat', loadChildren: './pages/chat/chat/chat.module#ChatPageModule' },
     { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' },
+    { path: 'geoloc', loadChildren: './pages/geoloc/geoloc.module#GeolocPageModule' },
+    { path: 'urgence', loadChildren: './pages/urgence/urgence.module#UrgencePageModule' },
+    { path: 'besoin', loadChildren: './pages/besoin/besoin.module#BesoinPageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

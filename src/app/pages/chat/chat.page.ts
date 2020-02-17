@@ -100,15 +100,21 @@ export class ChatPage implements OnInit, OnDestroy {
         Timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
       this.text = '';
-     this.content.scrollToBottom();
+      this.scrollToBottomOnInit();
     }
   }
 
+  ionViewDidEnter() {
+    this.content.scrollToBottom(-1);
+  }
+
   scrollToBottomOnInit() {
-    this.content.scrollToBottom(300);
-}
+    this.content.scrollToBottom(-1);
+
+  }
 
   ngOnInit() {
+    this.ionViewDidEnter();
     this.scrollToBottomOnInit();
     this.uid = localStorage.getItem('uid');
     this.chatRef =  this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
@@ -129,7 +135,6 @@ export class ChatPage implements OnInit, OnDestroy {
     this.authService.getAllUsers();
 
     this.localUserIsLogged = this.authService.localUser;
-    this.content.scrollToBottom();
   }
 
   getUserInfo(userId: string): User {

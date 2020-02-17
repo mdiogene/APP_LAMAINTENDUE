@@ -4,18 +4,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { NgModule } from '@angular/core';
+/*import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
+
 import { CalendarPage } from './calendar.page';
-var routes = [
-    {
-        path: '',
-        component: CalendarPage
-    }
+
+const routes: Routes = [
+  {
+    path: '',
+    component: CalendarPage
+  }
 ];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [CalendarPage]
+})
+export class CalendarPageModule {}
+*/
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { Calendar } from './calendar.page';
+import { NgCalendarModule } from 'ionic2-calendar';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 var CalendarPageModule = /** @class */ (function () {
     function CalendarPageModule() {
     }
@@ -25,9 +47,15 @@ var CalendarPageModule = /** @class */ (function () {
                 CommonModule,
                 FormsModule,
                 IonicModule,
-                RouterModule.forChild(routes)
+                RouterModule.forChild([
+                    {
+                        path: '',
+                        component: Calendar
+                    }
+                ]),
+                NgCalendarModule
             ],
-            declarations: [CalendarPage]
+            declarations: [Calendar]
         })
     ], CalendarPageModule);
     return CalendarPageModule;
