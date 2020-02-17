@@ -69,30 +69,8 @@ export class ChatPage implements OnInit, OnDestroy {
                 private userAPILMTService: UserApilmtService,
                 private roleAPILMTService: RoleApilmtService,
                 public file: File) {
-        //
-        // this.uid = localStorage.getItem('uid')<<<<;
-        // this.chatRef = this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
-        // this.actualUser = this.getUserInfo(this.uid);
-        //   this.Fbref = firebase.storage().ref();
-        // this.getAllNamesAndChats(this.chatRef);
-
 
     }
-
-
- /* sendUrlPicture(urlPicture: Observable<string>) {
-    if (this.text !== '') {
-      this.fs.collection('chats').add({
-        Name: this.af.auth.currentUser.displayName,
-        urlPicture: urlPicture,
-        userId: this.af.auth.currentUser.uid,
-        userEmail : this.af.auth.currentUser.email,
-        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      this.text = '';
-      this.scrollToBottomOnInit();
-    }
-  }*/
 
   ionViewDidEnter() {
     this.content.scrollToBottom(-1);
