@@ -38,7 +38,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import {Camera} from '@ionic-native/camera/ngx';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ParticlesModule } from 'angular-particle';
+// import { ParticlesModule } from 'angular-particle';
 
 
 @NgModule({
@@ -51,7 +51,7 @@ import { ParticlesModule } from 'angular-particle';
     HttpClientModule,
     ImagePageModule,
     SearchFilterPageModule,
-    ParticlesModule,
+    // ParticlesModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   entryComponents: [NotificationsComponent],

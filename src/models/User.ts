@@ -10,13 +10,18 @@ export class User {
     urlPicture: string;
     isAdmin: boolean;
     userId: string;
+    vehicule: boolean;
 
-    constructor(id?: number, name?: string,
-                prenom?: string, email?: string,
-                password?: string, urlPicture?: string,
+    constructor(id?: number,
+                name?: string,
+                prenom?: string,
+                email?: string,
+                password?: string,
+                urlPicture?: string,
                 isAdmin?: boolean,
                 userId?: string,
-                isOnline?: boolean ) {
+                isOnline?: boolean,
+                vehicule?: boolean) {
         this.id = id;
         this.name = name;
         this.prenom = prenom;
@@ -27,6 +32,7 @@ export class User {
         this.urlPicture = urlPicture;
         this.isAdmin = isAdmin;
         this.userId = userId;
+        this.vehicule = vehicule;
     }
 }
 

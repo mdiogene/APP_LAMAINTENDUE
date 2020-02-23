@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
-import { ParticlesConfig } from '../../../particles-config';
-import { ParticlesModule } from 'angular-particle';
+// import { ParticlesConfig } from '../../../particles-config';
+// import { ParticlesModule } from 'angular-particle';
 
-declare const particlesJS: any;
+// declare const particlesJS: any;
 
 @Component({
   selector: 'app-login',
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    public particlesNs: ParticlesModule
+    // public particlesNs: ParticlesModule
   ) { }
 
   ionViewWillEnter() {
@@ -39,18 +39,9 @@ export class LoginPage implements OnInit {
 
   }
 
+
   ngOnInit() {
-    this.invokeParticles();
-
-
-    /*this.onLoginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([
-        Validators.required
-      ])],
-      'password': [null, Validators.compose([
-        Validators.required
-      ])]
-    });*/
+    // this.invokeParticles();
   }
 
   OnSubmitLogin() {
@@ -112,8 +103,8 @@ export class LoginPage implements OnInit {
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
   }
-  public invokeParticles() {
-    particlesJS('particles-js', ParticlesConfig, function() {});
-    console.log('ParticlesConfig is loaded');
-  }
+  // public invokeParticles() {
+  //   particlesJS('particles-js', ParticlesConfig, function() {});
+  //   console.log('ParticlesConfig is loaded');
+  // }
 }

@@ -135,18 +135,7 @@ export class ChatPage implements OnInit, OnDestroy {
         // this.getUserConnectedWithAPILMT(this.uid);
         // console.log(this.uid);
         this.chatRef = this.fs.collection('chats', ref => ref.orderBy('Timestamp')).valueChanges();
-        // this.chatRef1 = this.fs.collection('chats').get();
         this.getAllChatMap(this.chatRef);
-
-        console.log('get chat map from firebase');
-        console.log(this.mapEmailChat);
-
-        console.log('get user map from apilmt');
-        console.log(this.mapEmailUser);
-
-        console.log('all my chats');
-        console.log(this.completeChats);
-
 
         this.userAPILMTService.getAllUsersAPILMT();
 
