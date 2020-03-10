@@ -35,6 +35,12 @@ export class AppComponent {
         direct: 'root',
         icon: 'home'
       },
+      {
+        title: 'Maraudes',
+        url: '/maraude',
+        direct: 'forward',
+        icon: 'walk',
+      },
 
       {
         title: 'Lchat',

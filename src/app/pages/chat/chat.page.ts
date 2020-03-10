@@ -42,9 +42,6 @@ export class ChatPage implements OnInit, OnDestroy {
     userFromAPI = new UserAPILMT();
     platform: any;
     returnpath: string;
-    uploadProgress: number;
-    nativepath: any;
-    firestore = firebase.storage();
     Ref: AngularFireStorageReference;
     task: AngularFireUploadTask;
     userFromAPISubscription: Subscription;
