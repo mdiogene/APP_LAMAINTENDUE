@@ -35,6 +35,12 @@ export class AppComponent {
         direct: 'root',
         icon: 'home'
       },
+      {
+        title: 'Maraudes',
+        url: '/maraude',
+        direct: 'forward',
+        icon: 'walk',
+      },
 
       {
         title: 'lmt chat',
@@ -49,7 +55,7 @@ export class AppComponent {
         icon: 'basket'
       },
       {
-        title: 'Urence',
+        title: 'Urgence',
         url: '/urgence',
         direct: 'forward',
         icon: 'warning',

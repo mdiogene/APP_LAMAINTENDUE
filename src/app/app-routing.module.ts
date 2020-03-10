@@ -14,7 +14,8 @@ const routes: Routes = [
 //  { path: 'calendar', loadChildren: './pages/calendar/calendar.module#CalendarPageModule' },
   { path: 'geoloc', loadChildren: './pages/geoloc/geoloc.module#GeolocPageModule' },
   { path: 'urgence', loadChildren: './pages/urgence/urgence.module#UrgencePageModule' },
-  { path: 'besoin', loadChildren: './pages/besoin/besoin.module#BesoinPageModule' },
+  { path: 'besoin', loadChildren: './pages/besoin/besoin.module#BesoinPageModule' },  { path: 'maraude', loadChildren: './pages/maraude/maraude.module#MaraudePageModule' },
+
 
 
 
