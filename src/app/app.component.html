@@ -21,7 +21,7 @@
                     <strong>edit profile</strong>
                   </ion-text>-->
                                 </a>
-                                <ion-text color="secondary"> |</ion-text>
+                                <ion-text color="secondary"></ion-text>
                                 <a class="text08" tappable (click)="Onlogout()">
                                     <ion-text color="medium">
                                         <ion-icon name="log-out"></ion-icon>
@@ -37,13 +37,13 @@
 
             <ion-content class="bg-profile">
                 <ion-list>
-                    <ion-list-header color="dark">
+                    <ion-list-header color="secondary">
                         <ion-label>Menu</ion-label>
                     </ion-list-header>
 
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                        <ion-item [routerLink]="[p.url]" color="primary">
-                            <ion-icon slot="start" [name]="p.icon" color="light"></ion-icon>
+                        <ion-item [routerLink]="[p.url]" color="secondary">
+                            <ion-icon slot="start" [name]="p.icon" color="secondary"></ion-icon>
                             <ion-label>
                                 {{p.title}}
                             </ion-label>

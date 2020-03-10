@@ -37,19 +37,19 @@ export class AppComponent {
       },
 
       {
-        title: 'lmt chat',
+        title: 'Lchat',
         url: '/chat',
         direct: 'forward',
         icon: 'chatbubbles'
       },
       {
-        title: 'besoin',
+        title: 'Besoin',
         url: '/besoin',
         direct: 'forward',
         icon: 'basket'
       },
       {
-        title: 'Urence',
+        title: 'Urgence',
         url: '/urgence',
         direct: 'forward',
         icon: 'warning',
