@@ -53,7 +53,13 @@ export class AppComponent {
         title: 'besoin',
         url: '/besoin',
         direct: 'forward',
-        icon: 'basket'
+        icon: 'md-cart'
+      },
+      {
+        title: 'don',
+        url: '/don',
+        direct: 'forward',
+        icon: 'md-heart'
       },
       {
         title: 'lmt Geolok',

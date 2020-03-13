@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'geoloc', loadChildren: './pages/geoloc/geoloc.module#GeolocPageModule' },
   { path: 'urgence', loadChildren: './pages/urgence/urgence.module#UrgencePageModule' },
   { path: 'besoin', loadChildren: './pages/besoin/besoin.module#BesoinPageModule' },
+  { path: 'don', loadChildren: './pages/don/don.module#DonPageModule' },
+
 
 
 
