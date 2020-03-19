@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import {User} from '../../models/User';
 import {Subject} from 'rxjs';
-import {Role} from '../../models/Role';
-import {UserRole} from '../../models/UserRole';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {HttpClient} from '@angular/common/http';
 import {apiLMT} from '../../environments/environment';
 import {AlertService} from './alert-service.service';
 import {LoadingService} from './loading-service.service';
 import {UserAPILMT} from '../../models/UserAPILMT';
+import {MaraudeUsers} from '../../models/MauraudeUsers';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserApilmtService {
   private userAPILMTUrl = `${apiLMT.url}/users`;
-  private userRolesAPILMTUrl = `${apiLMT.url}/userRoles`;
+  private maraudeUsersAPILMTUrl = `${apiLMT.url}/maraudeUserses`;
   users: User[] = [];
   user = new User();
   userByEmail: User;
@@ -23,8 +21,10 @@ export class UserApilmtService {
   userByEmailSubject = new Subject<User>();
     userAPILMTSubject = new Subject<UserAPILMT>();
     usersAPILMTSubject =  new Subject<UserAPILMT[]>();
+    maraudesUsersAPILMTSubject =  new Subject<MaraudeUsers[]>();
     userFromAPI: UserAPILMT;
     usersFromAPI: UserAPILMT[] = [];
+    maraudesUsers: MaraudeUsers[] = [];
 
     constructor(private http: HttpClient,
               public loadingService: LoadingService,
@@ -38,6 +38,11 @@ export class UserApilmtService {
 
     emitUsersAPILMTSubject() {
         this.usersAPILMTSubject.next(this.usersFromAPI);
+        this.loadingService.hideLoading();
+    }
+
+    emitMaraudesUsersAPILMTSubject() {
+        this.maraudesUsersAPILMTSubject.next(this.maraudesUsers);
         this.loadingService.hideLoading();
     }
     emitUserSubject() {
@@ -68,7 +73,24 @@ export class UserApilmtService {
         );
     }
 
-  getUserByEmail(email: string): UserAPILMT {
+    getAllMaraudesUsers(): void {
+        this.loadingService.showLoading();
+        this.http.get<any>(this.maraudeUsersAPILMTUrl).subscribe(
+            next => {
+                const maraudeUsers = next._embedded.maraudeUserses;
+                if (maraudeUsers && maraudeUsers.length > 0) {
+                    this.maraudesUsers = next._embedded.maraudeUserses;
+                }
+                this.emitMaraudesUsersAPILMTSubject();
+            },
+            error => {
+                console.log(error);
+                this.handleError(error);
+            }
+        );
+    }
+
+    getUserByEmail(email: string): UserAPILMT {
    this.loadingService.showLoading();
     this.userByEmail = null;
     if (email) {
@@ -91,20 +113,23 @@ export class UserApilmtService {
     this.loadingService.showLoading();
     this.userByEmail = null;
     if (firebaseId) {
-      this.http.get<UserAPILMT>(this.userAPILMTUrl + '/search/findByUserId?userId=' + firebaseId).subscribe(
-          next => {
-            if (next) {
-              // this.user = next;
-              this.userFromAPI = next;
-                return this.userFromAPI;
+        this.http.get<UserAPILMT>(this.userAPILMTUrl + '/search/findByUserId?userId=' + firebaseId).subscribe(
+            next => {
+                if (next) {
+                    // this.user = next;
+                    this.userFromAPI = next;
+                    this.emitUserAPILMTSubject();
+                    return this.userFromAPI;
+                }
+
+            },
+            error => {
+                this.handleError(error);
             }
-            this.emitUserAPILMTSubject();
-          },
-          error => {
-            this.handleError(error);
-          }
-      );
+        );
     }
+      console.log('userFromAPIservice');
+      console.log(this.userFromAPI);
     return;
   }
 

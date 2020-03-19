@@ -38,6 +38,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import {Camera} from '@ionic-native/camera/ngx';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {DatePipe} from '@angular/common';
 // import { ParticlesModule } from 'angular-particle';
 
 
@@ -73,6 +74,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     Camera,
     SplashScreen,
     InAppBrowser,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

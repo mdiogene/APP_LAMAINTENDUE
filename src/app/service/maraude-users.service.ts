@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {apiLMT} from '../../environments/environment';
 import {Subject} from 'rxjs';
-import {Maraude} from '../../models/Maraude';
 import {MaraudeUsers} from '../../models/MauraudeUsers';
 import {AlertService} from './alert-service.service';
 import {LoadingService} from './loading-service.service';
@@ -29,10 +28,10 @@ export class MaraudeUsersService {
     this.maraudeUsers = null;
     this.http.get<any>(this.maraudeUsersAPILMTUrl).subscribe(
         next => {
-          const maraudeUsers = next;
-          if (next) {
-            this.maraudeUsers = maraudeUsers._embedded.maraudeUsers;
-          }
+            const maraudeUsers = next._embedded.maraudeUserses;
+            if (maraudeUsers && maraudeUsers.length > 0) {
+                this.maraudeUsers = next._embedded.maraudeUserses;
+            }
           console.log(this.maraudeUsers);
           this.emitMaraudeUsersSubject();
         },

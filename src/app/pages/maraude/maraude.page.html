@@ -8,40 +8,57 @@
 </ion-header>
 
 <ion-content padding>
-    <form>
-        <div class="form-group">
+    <form name="participants">
+        <div class="form-group" *ngIf="maraude.lieu">
             <label for="lieuMaraude">Lieu Maraude</label>
-            <input type="text" class="form-control" id="lieuMaraude" aria-describedby="emailHelp" [readOnly]="!maraude.isOnUpdate" (ngModel)="maraude.lieu" [value]="maraude.lieu.lieuName" placeholder="Lieu">
+            <input type="text" class="form-control" id="lieuMaraude" aria-describedby="emailHelp"
+                   [readOnly]="!maraude.isOnUpdate" [value]="maraude.lieu.lieuName"
+                   placeholder="Lieu">
         </div>
         <div class="form-group">
             <label for="dateMaraude">Date</label>
-            <input type="datetime-local" class="form-control" id="dateMaraude" [readOnly]="!maraude.isOnUpdate" (ngModel)="maraude.duree" [value]="maraude.date"  placeholder="date">
+            <input type="datetime-local" class="form-control" id="dateMaraude" [readOnly]="!maraude.isOnUpdate"
+                   [value]="maraude.date" placeholder="date">
         </div>
         <div class="form-group">
             <label for="duree">Durée</label>
-            <input type="text" class="form-control" id="duree" aria-describedby="emailHelp" [readOnly]="!maraude.isOnUpdate" (ngModel)="maraude.duree" [value]="maraude.duree" placeholder="Durée">
+            <input type="text" class="form-control" id="duree" aria-describedby="emailHelp"
+                   [readOnly]="!maraude.isOnUpdate" [value]="maraude.duree"
+                   placeholder="Durée">
         </div>
         <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="vehicule" (click)="vehicule" class="custom-control-input">
+                <input type="radio" id="customRadioInline1" name="vehicule" [(ngModel)]="vehicule" value="vehicule"
+                       (change)="isVehicule(vehicule)" class="custom-control-input">
                 <label class="custom-control-label" for="customRadioInline1">Vehiculé</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="vehicule" (click)="vehicule" class="custom-control-input">
+                <input type="radio" id="customRadioInline2" name="vehicule" [(ngModel)]="vehicule" value="pasVehicule"
+                       (change)="isVehicule(vehicule)" class="custom-control-input">
                 <label class="custom-control-label" for="customRadioInline2">Pas Vehiculé</label>
             </div>
         </div>
         <div class="form-group">
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline3" name="participate" (click)="participate" class="custom-control-input">
+                <input type="radio" id="customRadioInline3" name="participate" [(ngModel)]="participate"
+                       value="participe" (change)="isParticipate(participate)" class="custom-control-input"/>
+
                 <label class="custom-control-label" for="customRadioInline3">Partcipe</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline4" name="participate" (click)="participate" class="custom-control-input">
+                <input type="radio" id="customRadioInline4" name="participate" [(ngModel)]="participate"
+                       value="pasParticipe" (change)="isParticipate(participate)" class="custom-control-input">
                 <label class="custom-control-label" for="customRadioInline4">Participe Pas</label>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="sendPartipation(maraude)">Submit</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" (click)="sendPartipation(maraude)">Submit</button>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-secondary" (click)="previous()" [disabled]="!hasPrevious()">Maraude précédent</button>
+            {{'  '}}
+            <button type="button" class="btn btn-secondary" (click)="next()" [disabled]="!hasNext()">Maraude suivant</button>
+        </div>
     </form>
 
 </ion-content>
