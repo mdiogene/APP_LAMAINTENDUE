@@ -52,7 +52,8 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" (click)="sendPartipation(maraude)">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!canAddParticipant" (click)="sendPartipation(maraude)">Submit</button>
+            <label *ngIf="!canAddParticipant">Desolé le nombre maximal de participants atteint ou vous êtes déjà inscrit.</label>
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-secondary" (click)="previous()" [disabled]="!hasPrevious()">Maraude précédent</button>

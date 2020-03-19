@@ -31,13 +31,14 @@ export class MaraudePage implements OnInit, OnDestroy {
     maraudeUserFromAPISubscription: Subscription;
     participate: string;
     vehicule: string;
-    canAddParticipant: boolean;
+    canAddParticipant = true;
     maraudesMap = new Map<number, Maraude>();
     usersMapArray = new Map<number, Map<number, UserAPILMT[]>>();
     maraudeUsersMap = new Map<number, MaraudeUsers>();
     hasNextMaraude: boolean;
     hasPreviousMaraude: boolean;
     usersMap = new Map<number, UserAPILMT[]>();
+    private participantDejaInscrit = false;
 
     constructor(private datePipe: DatePipe,
                 public af: AngularFireAuth,
@@ -88,6 +89,7 @@ export class MaraudePage implements OnInit, OnDestroy {
         this.maraudesAPILMTService.getAllMaraudes();
         this.maraudeUserAPILMTService.getAllMaraudeUsers();
         this.getUsersForMaraude();
+this.canAddMaraudeParticipants();
     }
 
     getUsersForMaraude(): void {
@@ -99,13 +101,8 @@ export class MaraudePage implements OnInit, OnDestroy {
                 }
             });
             this.usersMap.set(maraude.id, this.usersForMaraude);
+            this.canAddMaraudeParticipants();
         });
-        // this.maraudeUsers.forEach( maraudeUser => {
-        //   if (!this.usersMapArray.has(maraudeUser.maraude.id)) {
-        //     this.usersMapArray.set(maraudeUser.maraude.id, this.usersMap);
-        //   }
-        // });
-
     }
 
     getUserConnectedWithAPILMT(userUID: string): void {
@@ -119,19 +116,29 @@ export class MaraudePage implements OnInit, OnDestroy {
     }
 
     saveUserParticipation(maraude: Maraude) {
+        this.participantDejaInscrit = false;
         if (this.usersMap.has(maraude.id)) {
-            const usersArrayLenght = this.usersMap.get(maraude.id).length;
-            if (maraude.participantMax > usersArrayLenght) {
+            const usersArrayLenght = this.usersMap.get(maraude.id);
+            if (maraude.participantMax > usersArrayLenght.length) {
+                this.canAddParticipant = true;
                 this.maraudeUser.user = this.userFromAPI;
                 this.maraudeUser.maraude = maraude;
                 this.isParticipate(this.participate);
-                this.maraudeUserAPILMTService.addMaraudeUser(this.maraudeUser);
-                this.usersMap.get(maraude.id).unshift(this.userFromAPI);
+                usersArrayLenght.forEach( user => {
+                    if (user.id === this.userFromAPI.id) {
+                        this.participantDejaInscrit = true;
+                        this.canAddParticipant = false;
+                    }
+                });
+                if (this.canAddParticipant) {
+                    this.maraudeUserAPILMTService.addMaraudeUser(this.maraudeUser);
+                    this.usersMap.get(maraude.id).unshift(this.userFromAPI);
+                }
+
                 console.log('nombre maximal de participants n est pas atteint');
                 console.log(this.maraudeUser);
             } else {
-                console.log('Desolé nombre maximal de participants atteint');
-                console.log(usersArrayLenght);
+                this.canAddParticipant = false;
             }
         } else {
             console.log('je suis le premier inscrit');
@@ -141,18 +148,22 @@ export class MaraudePage implements OnInit, OnDestroy {
             this.maraudeUser.maraude = maraude;
             this.isParticipate(this.participate);
             this.maraudeUserAPILMTService.addMaraudeUser(this.maraudeUser);
+            this.canAddParticipant = true;
         }
     }
 
-    canAddMaraudeParticipants(maraude: Maraude): boolean {
-        if (this.usersMap.has(maraude.id)) {
-            const usersArrayLenght = this.usersMap.get(maraude.id).length;
-            if (maraude.participantMax > usersArrayLenght) {
+    canAddMaraudeParticipants(): boolean {
+        if (this.usersMap.has(this.maraude.id)) {
+            const usersArrayLenght = this.usersMap.get(this.maraude.id).length;
+            if (this.maraude.participantMax > usersArrayLenght) {
+                this.canAddParticipant = true;
                 return true;
             } else {
+                this.canAddParticipant = false;
                 return false;
             }
         } else {
+            this.canAddParticipant = true;
             return true;
         }
     }
@@ -175,17 +186,21 @@ export class MaraudePage implements OnInit, OnDestroy {
     }
 
     next() {
+        this.getUsersForMaraude();
         const maraudeNext = this.maraude;
         if ((this.maraudes.length > 1) && ((this.maraudes.indexOf(this.maraude)) < (this.maraudes.length - 1))) {
             this.maraude = this.maraudes[this.maraudes.indexOf(maraudeNext) + 1];
         }
+        this.canAddMaraudeParticipants();
     }
 
     previous() {
+        this.getUsersForMaraude();
         const maraudePrevious = this.maraude;
         if ((this.maraudes.length > 1) && ((this.maraudes.indexOf(this.maraude)) > 0)) {
             this.maraude = this.maraudes[this.maraudes.indexOf(maraudePrevious) - 1];
         }
+        this.canAddMaraudeParticipants();
     }
 
     hasNext(): boolean {
