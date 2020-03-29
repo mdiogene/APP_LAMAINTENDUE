@@ -118,6 +118,9 @@ export class UserApilmtService {
                 if (next) {
                     // this.user = next;
                     this.userFromAPI = next;
+
+                    console.log('userFromAPIservice inside');
+                    console.log(this.userFromAPI);
                     this.emitUserAPILMTSubject();
                     return this.userFromAPI;
                 }
@@ -128,7 +131,7 @@ export class UserApilmtService {
             }
         );
     }
-      console.log('userFromAPIservice');
+      console.log('userFromAPIservice outside');
       console.log(this.userFromAPI);
     return;
   }
