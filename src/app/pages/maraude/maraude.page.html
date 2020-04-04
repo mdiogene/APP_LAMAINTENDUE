@@ -8,25 +8,27 @@
 </ion-header>
 
 <ion-content padding>
+
     <form name="participants">
+        <label *ngIf="!maraude">Pas de maraude de prévu</label>
         <div class="form-group" *ngIf="maraude.lieu">
             <label for="lieuMaraude">Lieu Maraude</label>
             <input type="text" class="form-control" id="lieuMaraude" aria-describedby="emailHelp"
                    [readOnly]="!maraude.isOnUpdate" [value]="maraude.lieu.lieuName"
                    placeholder="Lieu">
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude.lieu">
             <label for="dateMaraude">Date</label>
             <input type="datetime-local" class="form-control" id="dateMaraude" [readOnly]="!maraude.isOnUpdate"
                    [value]="maraude.date" placeholder="date">
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude.lieu">
             <label for="duree">Durée</label>
             <input type="text" class="form-control" id="duree" aria-describedby="emailHelp"
                    [readOnly]="!maraude.isOnUpdate" [value]="maraude.duree"
                    placeholder="Durée">
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude.lieu">
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="customRadioInline1" name="vehicule" [(ngModel)]="vehicule" value="vehicule"
                        (change)="isVehicule(vehicule)" class="custom-control-input">
@@ -38,7 +40,7 @@
                 <label class="custom-control-label" for="customRadioInline2">Pas Vehiculé</label>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude.lieu">
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="customRadioInline3" name="participate" [(ngModel)]="participate"
                        value="participe" (change)="isParticipate(participate)" class="custom-control-input"/>
@@ -51,11 +53,11 @@
                 <label class="custom-control-label" for="customRadioInline4">Participe Pas</label>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude.lieu">
             <button type="submit" class="btn btn-primary" [disabled]="!canAddParticipant" (click)="sendPartipation(maraude)">Submit</button>
             <label *ngIf="!canAddParticipant">Desolé le nombre maximal de participants atteint ou vous êtes déjà inscrit.</label>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="maraude">
             <button type="button" class="btn btn-secondary" (click)="previous()" [disabled]="!hasPrevious()">Maraude précédent</button>
             {{'  '}}
             <button type="button" class="btn btn-secondary" (click)="next()" [disabled]="!hasNext()">Maraude suivant</button>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import {Md5} from 'ts-md5';
 // import { ParticlesConfig } from '../../../particles-config';
 // import { ParticlesModule } from 'angular-particle';
 
@@ -45,7 +46,8 @@ export class LoginPage implements OnInit {
   }
 
   OnSubmitLogin() {
-    this.authService.login(this.email, this.password).then(res => {
+    const pass = Md5.hashStr(this.password).toString();
+    this.authService.login(this.email, pass).then(res => {
       this.router.navigate(['/home-results']);
     }).catch(er => alert('user n\'existe pas'));
   }
