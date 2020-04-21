@@ -67,13 +67,21 @@ export class ChatPage implements OnInit, OnDestroy {
                 private roleAPILMTService: RoleApilmtService,
                 public file: File) {
 
+                    this.userSubscription = this.authService.userSubject.subscribe(
+                        (user: User) => {
+                          this.localUser = user;
+                        }
+                    );
+                    this.authService.getAllUsers();
+                   // this.initializeApp();
+
     }
 
   ionViewDidEnter() {
     this.content.scrollToBottom(1);
   }
 
-  
+
   scrollToBottomOnInit() {
     this.content.scrollToBottom(1);
 

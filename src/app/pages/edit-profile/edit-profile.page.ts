@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
-
+import {User} from '../../../models/User';
+import {Observable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,7 +9,8 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
-
+  userSubscription: Subscription;
+  localUser = new User();
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,

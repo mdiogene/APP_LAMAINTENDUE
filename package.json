@@ -44,6 +44,7 @@
     "cordova-plugin-filechooser": "1.2.0",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-inappbrowser": "3.2.0",
+    "cordovapush": "^0.2.2",
     "core-js": "^2.5.4",
     "firebase": "^7.8.1",
     "ionic2-calendar": "^0.5.2",
@@ -100,7 +101,8 @@
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-filechooser": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "co.realtime.plugins.CordovaPush": {}
     },
     "platforms": [
       "android",
