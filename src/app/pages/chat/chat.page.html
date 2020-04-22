@@ -9,24 +9,37 @@
 <ion-content #content [scrollEvents]="true">
     <div class="chat" *ngFor="let chat of chatRef | async">
         <div *ngIf="chat.userEmail !== localUserIsLogged.email" class="me ion-align-self-start">
-            {{chat.Name}}
+            <ion-item>
+                <ion-avatar slot="start" class="user-avatar" item-left>
+                    <!--<img src="assets/img/IMG_0732.jpg">-->
+                    <img [src]="localUser.urlPicture">
+                </ion-avatar>
+                {{chat.Name}}
+            </ion-item>
             <br>
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <div *ngIf="chat.Message">{{chat.Message}}</div>
-            <div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>
+            <!--<div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>-->
         </div>
 
         <div *ngIf="chat.userEmail === localUserIsLogged.email" class="me ion-align-self-end">
-            {{chat.Name}}
+            <ion-item>
+                <ion-avatar slot="start" class="user-avatar">
+                    <!--<img src="assets/img/IMG_0732.jpg">-->
+                    <img [src]="localUser.urlPicture">
+                </ion-avatar>
+                {{chat.Name}}
+            </ion-item>
             <br>
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <br>
             <div *ngIf="chat.Message">{{chat.Message}}</div>
             <!--<div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>-->
-            <div *ngIf="chat.urlPicture"><a [href]="chat.urlPicture"><img [src]="chat.urlPicture"></a>
-        </div>
+            <div *ngIf="chat.urlPicture">
+                <a [href]="chat.urlPicture"><img [src]="chat.urlPicture"></a>
+            </div>
         </div>
     </div>
 
@@ -41,6 +54,6 @@
         <ion-button (click)="fileInput.click()" fill="clear" icon-only slot="start">
             <ion-icon name="add-circle"></ion-icon>
         </ion-button>
-        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;"/>
+        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;" />
     </ion-item>
 </ion-footer>
