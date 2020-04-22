@@ -3,7 +3,7 @@ export const environment = {
 };
 
 export const apiLMT = {
-    url: 'http://94.23.204.130:8080/lamaintenduapi'
+    url: 'https://lamaintendue.org:8243/lmt'
 };
 
 export const apiLMT1 = {
