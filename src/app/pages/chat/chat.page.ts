@@ -75,13 +75,6 @@ export class ChatPage implements OnInit, OnDestroy {
                     this.authService.getAllUsers();
                    // this.initializeApp();
 
-
-
-        this.userFromAPISubscription = this.userAPILMTService.userAPILMTSubject.subscribe(
-            (user: UserAPILMT) => {
-                this.userFromAPI = user;
-            }
-        );
     }
 
   ionViewDidEnter() {
@@ -182,21 +175,11 @@ export class ChatPage implements OnInit, OnDestroy {
             }
         );
 
-
-        console.log('user local');
-        console.log(this.localUser);
-        console.log('user from api');
-        console.log(this.userFromAPI);
-
         this.authService.getAllUsers();
         this.getAllNamesAndChats(this.chatRef);
+
         this.localUserIsLogged = this.authService.localUser;
         this.content.scrollToBottom();
-
-        console.log('apres, user local');
-        console.log(this.localUser);
-        console.log('apres, user from api');
-        console.log(this.userFromAPI);
     }
 
     getAllChatMap(chatRef: any): void {
@@ -223,6 +206,8 @@ export class ChatPage implements OnInit, OnDestroy {
                 }
             });
         });
+        console.log('name n existe pas');
+        console.log(this.completeChats);
     }
 
     getUserConnectedWithAPILMT(userUID: string): void {
