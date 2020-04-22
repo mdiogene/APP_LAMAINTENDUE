@@ -3,7 +3,7 @@ export const environment = {
 };
 
 export const apiLMT = {
-    url: 'https://lamaintendue.org:8243/lmt'
+    url: 'https://94.23.204.130:8243/lmt'
 };
 
 export const apiLMT1 = {

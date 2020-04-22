@@ -55,6 +55,27 @@ export class UserApilmtService {
    this.loadingService.hideLoading();
   }
 
+    updateUser(user: UserAPILMT): void {
+        this.loadingService.showLoading();
+        if (user._links) {
+            const urlHref = this.getUrlForUpdateAndDelete(user._links.self.href, 'users', `${apiLMT.url}`);
+            this.http.put<UserAPILMT>(urlHref, user).subscribe(
+                next => {
+                    this.userFromAPI = next;
+                    this.emitUserAPILMTSubject();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+        }
+    }
+
+    getUrlForUpdateAndDelete(url: string, objectToAdd: string, urlToAdd: string): string {
+        const urlObject = url.substring(url.indexOf(objectToAdd), url.length );
+        const vraiUrl = urlToAdd + '/' + urlObject;
+        return vraiUrl;
+    }
 
     getAllUsersAPILMT(): void {
         this.loadingService.showLoading();

@@ -9,12 +9,14 @@ export class UserAPILMT extends RestFullObject {
     password: string;
     isOnUpdate: boolean;
     vehicule: boolean;
+    isOnLine: boolean;
     tel: string;
     urlPhoto: string;
     role: Role;
 
     constructor(id?: number, userId?: string, name?: string, prenom?: string,
-                email?: string, password?: string, telNumber?: string, vehicule?: boolean, urlPicture?: string, role?: Role, _links?: any) {
+                email?: string, password?: string, telNumber?: string, vehicule?: boolean,
+                isOnLine?: boolean, urlPicture?: string, role?: Role, _links?: any) {
         super(_links);
         this.id = id;
         this.userId = this.userId;
@@ -27,5 +29,6 @@ export class UserAPILMT extends RestFullObject {
         this.urlPhoto = urlPicture;
         this.role = role;
         this.vehicule = vehicule;
+        this.isOnLine = isOnLine;
     }
 }

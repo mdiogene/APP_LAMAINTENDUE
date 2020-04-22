@@ -8,6 +8,8 @@ import { Pages } from './interfaces/pages';
 import {Subscription} from 'rxjs';
 import {User} from '../models/User';
 import {AuthService} from './service/auth.service';
+import {UserApilmtService} from './service/user-apilmt.service';
+import {UserAPILMT} from '../models/UserAPILMT';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,8 @@ export class AppComponent {
   public appPages: Array<Pages>;
   userSubscription: Subscription;
   localUser = new User();
+  private userAPILMTSubscription: Subscription;
+  private localUserAPILMT: UserAPILMT;
  // localUserIsLogged = new User();
 
   constructor(
@@ -27,6 +31,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     public navCtrl: NavController,
     private authService: AuthService,
+    private userAPILMTService: UserApilmtService
   ) {
     this.appPages = [
       {
@@ -74,6 +79,12 @@ export class AppComponent {
           this.localUser = user;
         }
     );
+    this.userAPILMTSubscription = this.userAPILMTService.userAPILMTSubject.subscribe(
+        (user: UserAPILMT) => {
+          this.localUserAPILMT = user;
+        }
+    );
+
     this.authService.getAllUsers();
     this.initializeApp();
   }

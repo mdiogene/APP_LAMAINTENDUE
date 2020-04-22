@@ -4,6 +4,9 @@ import { NavController, MenuController, ToastController, AlertController, Loadin
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import {Md5} from 'ts-md5';
+import {UserApilmtService} from '../../service/user-apilmt.service';
+import {UserAPILMT} from '../../../models/UserAPILMT';
+import {Subscription} from 'rxjs';
 // import { ParticlesConfig } from '../../../particles-config';
 // import { ParticlesModule } from 'angular-particle';
 
@@ -22,6 +25,8 @@ export class LoginPage implements OnInit {
     myParams: object = {};
     width:  100;
     height = 100;
+  private userFromAPI: UserAPILMT;
+  private userFromAPISubscription: Subscription;
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +37,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private userAPILMTService: UserApilmtService
     // public particlesNs: ParticlesModule
   ) { }
 
@@ -42,13 +48,18 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
-    // this.invokeParticles();
+    this.userFromAPISubscription = this.userAPILMTService.userAPILMTSubject.subscribe(
+        (user: UserAPILMT) => {
+          this.userFromAPI = user;
+        }
+    );
   }
 
   OnSubmitLogin() {
     const pass = Md5.hashStr(this.password).toString();
     this.authService.login(this.email, pass).then(res => {
-      this.router.navigate(['/home-results']);
+    this.userAPILMTService.getUserByEmail(this.email);
+    this.updateUser();
     }).catch(er => alert('user n\'existe pas'));
   }
 
@@ -109,4 +120,9 @@ export class LoginPage implements OnInit {
   //   particlesJS('particles-js', ParticlesConfig, function() {});
   //   console.log('ParticlesConfig is loaded');
   // }
+  private updateUser() {
+    this.userFromAPI.isOnLine = true;
+    this.userAPILMTService.updateUser(this.userFromAPI);
+    this.router.navigate(['/home-results']);
+  }
 }

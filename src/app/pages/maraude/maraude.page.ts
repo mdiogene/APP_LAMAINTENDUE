@@ -156,6 +156,7 @@ export class MaraudePage implements OnInit, OnDestroy {
                     });
                 });
                 if (this.canAddParticipant) {
+                    this.userAPILMTService.updateUser(this.userFromAPI);
                     this.maraudeUserAPILMTService.addMaraudeUser(this.maraudeUser);
                     this.usersMap.get(maraude.id).unshift(this.userFromAPI);
                 }

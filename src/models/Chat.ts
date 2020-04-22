@@ -7,4 +7,5 @@ export class Chat {
     userEmail: string;
     Timestamp: string;
     urlPicture: string;
+
 }
