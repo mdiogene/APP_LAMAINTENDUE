@@ -20,7 +20,7 @@
             <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
             <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <div *ngIf="chat.Message">{{chat.Message}}</div>
-            <!--<div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>-->
+            <div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>
         </div>
 
         <div *ngIf="chat.userEmail === localUserIsLogged.email" class="me ion-align-self-end">
@@ -54,6 +54,6 @@
         <ion-button (click)="fileInput.click()" fill="clear" icon-only slot="start">
             <ion-icon name="add-circle"></ion-icon>
         </ion-button>
-        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;" />
+        <input #fileInput type="file" (change)="getPhoto($event)" style="display: none;"/>
     </ion-item>
 </ion-footer>

@@ -58,6 +58,7 @@ export class LoginPage implements OnInit {
   OnSubmitLogin() {
     const pass = Md5.hashStr(this.password).toString();
     this.authService.login(this.email, pass).then(res => {
+      this.router.navigate(['/home-results']);
    // this.userAPILMTService.getUserByEmail(this.email);
     // this.updateUser();
     }).catch(er => alert('user n\'existe pas'));
