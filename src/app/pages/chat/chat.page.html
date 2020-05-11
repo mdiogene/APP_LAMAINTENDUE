@@ -17,10 +17,10 @@
                 {{chat.Name}}
             </ion-item>
             <br>
-            <ion-label *ngIf="userFromAPI.isOnLine">En Ligne : {{'Online'}}</ion-label>
-            <ion-label *ngIf="!userFromAPI.isOnLine">En Ligne : {{'Offline'}}</ion-label>
+            <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
+            <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <div *ngIf="chat.Message">{{chat.Message}}</div>
-            <!--<div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>-->
+            <div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>
         </div>
 
         <div *ngIf="chat.userEmail === localUserIsLogged.email" class="me ion-align-self-end">
@@ -32,8 +32,8 @@
                 {{chat.Name}}
             </ion-item>
             <br>
-            <ion-label *ngIf="userFromAPI.isOnLine">En Ligne : {{'Online'}}</ion-label>
-            <ion-label *ngIf="!userFromAPI.isOnLine">En Ligne : {{'Offline'}}</ion-label>
+            <ion-label *ngIf="localUser.isOnline">En Ligne : {{'Online'}}</ion-label>
+            <ion-label *ngIf="!localUser.isOnline">En Ligne : {{'Offline'}}</ion-label>
             <br>
             <div *ngIf="chat.Message">{{chat.Message}}</div>
             <!--<div *ngIf="chat.urlPicture"><img [src]="chat.urlPicture"></div>-->
