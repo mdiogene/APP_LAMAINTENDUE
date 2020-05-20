@@ -3,57 +3,110 @@
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
       </ion-buttons>
-      <ion-title>Dons</ion-title>
+      <ion-title>Reponses aux Besoins</ion-title>
   </ion-toolbar>
 </ion-header>
-<!--<ion-list>
-  <ion-list-header>Besoin Actuelle</ion-list-header>
 
-  <ion-item>
-    <ion-label>Besoin</ion-label>
-    <ul><ion-select placeholder="Liste">
-      <ion-select-option value="f">Farine</ion-select-option>
-      <ion-select-option value="m">Chausette</ion-select-option>
-      <ion-select-option value="m">Chemise</ion-select-option>
-      <ion-select-option value="m">Eau</ion-select-option>
-    </ion-select></ul>
-    <ion-input type="number" value="0">Quantité</ion-input>
-    <ion-item>
-        <ion-label position="nom">Nom</ion-label>
-        <ion-input></ion-input>
-     </ion-item>
-  </ion-item> 
+<ion-content padding>
 
-</ion-list>-->
+<form name="participants">
+  <label *ngIf="!besoin">Pas de besoin de prévu</label>
+  <div *ngIf="besoin!=null">
+    <ion-item no-padding class="animated fadeInUp">
+      <p>
+      <ion-label position="floating">
+Type de Besoin : {{besoin.typeBesoin ? besoin.typeBesoin.type : '' }}
+      </ion-label>
+      </p>
 
-<ion-content fullscreen>
-  <ion-list>
-    <ion-list-header>
-      
-    </ion-list-header>
-
-    <ion-item>
-      <ion-label>Liste dons</ion-label>
-        <ion-select placeholder="Liste">
-          <ion-select-option value="">Farine</ion-select-option>
-          <ion-select-option value="m">Chausette</ion-select-option>
-          <ion-select-option value="m">Chemise</ion-select-option>
-          <ion-select-option value="m">Eau</ion-select-option>
-          </ion-select>
     </ion-item>
+  </div>
+  <div *ngIf="besoin!=null">
 
-    <ion-item>
-      <ion-input type="number" value="">Quantité : </ion-input>
+    <div *ngIf="besoin.typeBesoin && besoin.typeBesoin.type === 'Alimentaire'">
+      <ion-item no-padding class="animated fadeInUp">
+        <p>
+          <ion-label position="floating">
+         Nom Type Alientaire: {{besoin.alimentaire ? besoin.alimentaire.typeNom : ''}}
+          </ion-label>
+        </p>
+      </ion-item>
+    </div>
+
+    <div *ngIf="besoin.typeBesoin && besoin.typeBesoin.type === 'Service'">
+      <ion-item no-padding class="animated fadeInUp">
+        <p>
+      <ion-label position="floating">
+        Nom Type Service : {{besoin.service ? besoin.service.typeNom : ''}}
+      </ion-label>
+        </p>
+
+      </ion-item>
+    </div>
+
+    <div *ngIf="besoin.typeBesoin && besoin.typeBesoin.type === 'Vetement'">
+      <ion-item no-padding class="animated fadeInUp">
+        <p>
+          <ion-label position="floating">
+            Nom Type Vêtement : {{besoin.vetement ? besoin.vetement.typeNom : ''}}
+          </ion-label>
+        </p>
+
+
+      </ion-item>
+  </div>
+  <div *ngIf="besoin!=null">
+    <ion-item no-padding class="animated fadeInUp">
+      <p>
+      <ion-label position="floating">
+Quantité : {{besoin.quantite}}
+      </ion-label>
+      </p>
+    <!--<input autofocus class="form-control" type="number"-->
+           <!--[(ngModel)]="besoin.quantite" required="false" placeholder="Personnes ou Quantité">-->
     </ion-item>
+  </div>
 
-  </ion-list>
+  <div *ngIf="besoin!=null">
+    <ion-item no-padding class="animated fadeInUp">
+      <p>
+      <ion-label position="floating">
+      Date de création :  {{besoin.dateCreation}}
+      </ion-label>
+      </p>
+    </ion-item>
+  </div>
+
+  <div *ngIf="besoin">
+    <ion-item no-padding class="animated fadeInUp">
+      <p>
+        <ion-label position="floating">
+        Description : {{besoin.description}}
+      </ion-label>
+      </p>
+      <!--<input autofocus class="form-control" type="text"-->
+           <!--[(ngModel)]="besoin.description" required="true" placeholder="Description">-->
+    </ion-item>
+  </div>
 
 
+  <div class="form-group" *ngIf="besoin">
+    <ion-button icon-left size="medium" expand="full" shape="round" type="submit" color="tertiary" (click)="sendPartipation(besoin)"
+                tappable> Répondre
+    </ion-button>
+    <!--<button type="submit" class="btn btn-primary" [disabled]="!canAddParticipant" (click)="sendPartipation(besoin)">Submit</button>-->
+
+    <label *ngIf="!canAddParticipant">Desolé le nombre maximal de participants ou de quantité atteint.</label>
+  </div>
+  <div class="form-group" *ngIf="besoin">
+    <button type="button" class="btn btn-secondary" (click)="previous()" [disabled]="!hasPrevious()">Besoin précédent</button>
+    {{'  '}}
+    <button type="button" class="btn btn-secondary" (click)="next()" [disabled]="!hasNext()">Besoin suivant</button>
+  </div>
+  </div>
+</form>
 </ion-content>
 
-<ion-button slot="secondary" onclick="('')">
-  Envoyer
-</ion-button> 
-
-
-
+<!--<ion-button slot="secondary" onclick="('')">-->
+  <!--Envoyer-->
+<!--</ion-button>-->

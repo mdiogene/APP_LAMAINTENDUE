@@ -61,6 +61,7 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home-results']);
    // this.userAPILMTService.getUserByEmail(this.email);
     // this.updateUser();
+
     }).catch(er => alert('user n\'existe pas'));
   }
 
@@ -128,6 +129,5 @@ export class LoginPage implements OnInit {
   private updateUser() {
     this.userFromAPI.isOnLine = true;
     this.userAPILMTService.updateUser(this.userFromAPI);
-    this.router.navigate(['/home-results']);
   }
 }
