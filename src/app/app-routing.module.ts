@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'geoloc', loadChildren: './pages/geoloc/geoloc.module#GeolocPageModule' },
   { path: 'urgence', loadChildren: './pages/urgence/urgence.module#UrgencePageModule' },
   { path: 'besoin', loadChildren: './pages/besoin/besoin.module#BesoinPageModule' },  { path: 'maraude', loadChildren: './pages/maraude/maraude.module#MaraudePageModule' },
+  { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
 
 
 

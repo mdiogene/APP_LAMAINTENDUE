@@ -43,16 +43,19 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="" class="form-control input_pass" name="password" [(ngModel)]="password" placeholder="password">
+                            <input type="password" name="" class="form-control input_pass" name="password" [(ngModel)]="password" placeholder="mot de passe">
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customControlInline">
                                 <label class="custom-control-label" for="customControlInline">se souvenir de moi!</label>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="submit" (click)="OnSubmitLogin()" name="button" class="btn login_btn">Login</button>
+                            <button type="submit" (click)="OnSubmitLogin()" name="button" class="btn login_btn">Se connecter</button>
+                        </div><br>
+                        <div>
+                            <a href="" id="mdp-link" class="ion-text-center" routerLink="/reset-password">Mot de passe oublier ?</a>
                         </div>
                     </form>
                 </div>

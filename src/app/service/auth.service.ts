@@ -20,14 +20,13 @@ export class AuthService {
   usersMapConnected: Map<string, User> = new Map();
 
 
-  constructor(private AFauth: AngularFireAuth,
+  constructor(public AFauth: AngularFireAuth,
               private router: Router,
               public fs: AngularFirestore) {
   }
 
   // Partie Login
   login(email: string, password: string) {
-
     return new Promise((resolve, rejected) => {
       this.AFauth.auth.signInWithEmailAndPassword(email, password).then(user => {
         resolve(user);
@@ -49,6 +48,11 @@ export class AuthService {
       this.setUser(this.localUser);
       this.router.navigate(['/']);
     });
+  }
+
+  // reset password
+  resetPass(email: string) {
+    return this.AFauth.auth.sendPasswordResetEmail(email);
   }
 
   emitUserByEmailSubject() {

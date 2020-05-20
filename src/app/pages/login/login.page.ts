@@ -56,8 +56,8 @@ export class LoginPage implements OnInit {
   }
 
   OnSubmitLogin() {
-    const pass = Md5.hashStr(this.password).toString();
-    this.authService.login(this.email, pass).then(res => {
+  //  const pass = Md5.hashStr(this.password).toString();
+    this.authService.login(this.email, this.password).then(res => {
       this.router.navigate(['/home-results']);
    // this.userAPILMTService.getUserByEmail(this.email);
     // this.updateUser();
@@ -116,6 +116,10 @@ export class LoginPage implements OnInit {
 
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
+  }
+
+  goToResetPassword() {
+    this.navCtrl.navigateForward('/reset-password');
   }
   // public invokeParticles() {
   //   particlesJS('particles-js', ParticlesConfig, function() {});
