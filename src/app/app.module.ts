@@ -39,6 +39,7 @@ import {Camera} from '@ionic-native/camera/ngx';
 import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {DatePipe} from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { ParticlesModule } from 'angular-particle';
 
 
@@ -52,6 +53,9 @@ import {DatePipe} from '@angular/common';
     HttpClientModule,
     ImagePageModule,
     SearchFilterPageModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     // ParticlesModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],

@@ -77,6 +77,7 @@ export class LoginPage implements OnInit {
       this.userAPILMTService.getUserByEmail(this.email);
       this.getAppropriatePage();
       // this.updateUser();
+  // const pass = Md5.hashStr(this.password).toString();
     }).catch(er => alert('user n\'existe pas'));
   }
 
@@ -146,6 +147,10 @@ export class LoginPage implements OnInit {
 
   goToHome() {
     this.navCtrl.navigateRoot('/home-results');
+  }
+
+  goToResetPassword() {
+    this.navCtrl.navigateForward('/reset-password');
   }
   // public invokeParticles() {
   //   particlesJS('particles-js', ParticlesConfig, function() {});
