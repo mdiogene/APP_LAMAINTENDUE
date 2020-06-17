@@ -10,6 +10,8 @@ import {User} from '../models/User';
 import {AuthService} from './service/auth.service';
 import {UserApilmtService} from './service/user-apilmt.service';
 import {UserAPILMT} from '../models/UserAPILMT';
+import {RGPD} from '../models/RGPD';
+import {RgpdService} from './service/rgpd.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,6 @@ export class AppComponent {
   localUser = new User();
   private userAPILMTSubscription: Subscription;
   private localUserAPILMT: UserAPILMT;
- // localUserIsLogged = new User();
 
   constructor(
     private platform: Platform,
@@ -31,6 +32,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     public navCtrl: NavController,
     private authService: AuthService,
+    private rgpdService: RgpdService,
     private userAPILMTService: UserApilmtService
   ) {
     this.appPages = [
@@ -84,7 +86,6 @@ export class AppComponent {
           this.localUserAPILMT = user;
         }
     );
-
     this.authService.getAllUsers();
     this.initializeApp();
   }

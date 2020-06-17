@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>RGPD</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Collecte de données personnelles</h3>
+  <div class="rgpd">
+    <p>Bonjour,</p>
+    <p> L'administrateur de la Main Tendue a renseigné vos données personnelles (Nom, Prénom, numéros de téléphone et email) dans l'application afin de vous permettre de vous connecter.</p>
+    <p>Cependant, nous avons besoin de votre consentement pour conserver vos données personnelles afin d'être en conformité avec la RGPD (Règlement général sur la protection des données) et de vous permettre d'utiliser l'application dans le cadre des activités de La Main Tendue.</p>
+    <p>Merci de lire attentivement  le questionnaire "<b>Consentement sur la collecte de données personnelles"</b> ci-dessous d'y répondre.</p>
+
+    <div class="request-rgpd">
+      <form name="accord-rgpd">
+        <h3>Consentement sur la collecte de données personnelles</h3>
+
+        <p>Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par La Main Tendue  pour l’utilisation du site de l’application mobile Android et des services liés aux activités de l’association.</p>
+
+        <p>Les données collectées seront communiquées aux seuls destinataires suivants : Administrateur de La Main Tendue.</p>
+
+        <p>Les données sont conservées jusqu’à ce vous quittez l’association La Main Tendue.</p>
+
+        <p>Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement ou exercer votre droit à la limitation du traitement de vos données en contactant l’administrateur de La Main Tendue (coordonnées).
+          Vous pouvez retirer à tout moment votre consentement au traitement de vos données en contactant l’administrateur de La Main Tendue.
+          Vous pouvez également vous opposer au traitement de vos données en contactant l’administrateur de La Main Tendue </p>
+        <p>
+
+          <ion-button color="success" (click)="confirmation()">Je suis d'accord</ion-button>
+          <ion-button color="danger" (click)="refus()">Je ne suis pas d'accord</ion-button></p>
+
+      </form>
+    </div>
+  </div>
+</ion-content>

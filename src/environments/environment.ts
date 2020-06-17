@@ -3,7 +3,7 @@ export const environment = {
 };
 
 
-export const apiLMT2 = {
+export const apiLMT3 = {
     url: 'http://localhost:8080/lamaintenduapi',
 };
 
@@ -11,6 +11,11 @@ export const apiLMT2 = {
 export const apiLMT = {
     url: 'https://lamaintendue.org:8243/lmt'
 };
+
+export const apiLMT2 = {
+    url: 'https://lamaintendue.org:8080/lamaintenduapi'
+};
+
 
 export const apiLMT1 = {
     url: 'http://94.23.204.130:8280/lmt'

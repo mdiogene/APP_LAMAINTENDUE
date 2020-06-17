@@ -7,6 +7,8 @@ import {Md5} from 'ts-md5';
 import {UserApilmtService} from '../../service/user-apilmt.service';
 import {UserAPILMT} from '../../../models/UserAPILMT';
 import {Subscription} from 'rxjs';
+import {RGPD} from '../../../models/RGPD';
+import {RgpdService} from '../../service/rgpd.service';
 // import { ParticlesConfig } from '../../../particles-config';
 // import { ParticlesModule } from 'angular-particle';
 
@@ -22,24 +24,25 @@ export class LoginPage implements OnInit {
   password: string;
   public onLoginForm: FormGroup;
   myStyle: object = {};
-    myParams: object = {};
-    width:  100;
-    height = 100;
+  myParams: object = {};
+  width:  100;
+  height = 100;
   private userFromAPI: UserAPILMT;
   private userFromAPISubscription: Subscription;
+  rgpdsSubscription: Subscription;
+  rgpdMap = new Map<number, RGPD>();
 
   constructor(
-    public navCtrl: NavController,
-    public menuCtrl: MenuController,
-    public toastCtrl: ToastController,
-    public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private userAPILMTService: UserApilmtService
-    // public particlesNs: ParticlesModule
-  ) { }
+      public navCtrl: NavController,
+      public menuCtrl: MenuController,
+      public toastCtrl: ToastController,
+      public alertCtrl: AlertController,
+      public loadingCtrl: LoadingController,
+      private formBuilder: FormBuilder,
+      private authService: AuthService,
+      private router: Router,
+      private userAPILMTService: UserApilmtService,
+      private rgpdService: RgpdService) { }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -48,21 +51,47 @@ export class LoginPage implements OnInit {
 
 
   ngOnInit() {
+
+    this.rgpdsSubscription = this.rgpdService.rgpdSubject.subscribe(
+        (rgpds: RGPD[]) => {
+
+          rgpds.forEach(rg => {
+            if (rg && (rg.aconfirme === true) && (!this.rgpdMap.has(rg.user.id))) {
+              this.rgpdMap.set(rg.user.id, rg);
+            }
+          });
+        }
+    );
+
     this.userFromAPISubscription = this.userAPILMTService.userAPILMTSubject.subscribe(
         (user: UserAPILMT) => {
           this.userFromAPI = user;
         }
     );
+    this.rgpdService.getAllRGPDs();
   }
 
   OnSubmitLogin() {
-    const pass = Md5.hashStr(this.password).toString();
-    this.authService.login(this.email, pass).then(res => {
-    this.router.navigate(['/home-results']);
-    // this.userAPILMTService.getUserByEmail(this.email);
-    // this.updateUser();
-
+    // const pass = Md5.hashStr(this.password).toString();
+    this.authService.login(this.email, this.password).then(res => {
+      this.userAPILMTService.getUserByEmail(this.email);
+      this.getAppropriatePage();
+      // this.updateUser();
     }).catch(er => alert('user n\'existe pas'));
+  }
+
+  getAppropriatePage() {
+    if (this.rgpdMap.has(this.userFromAPI.id)) {
+      console.log('dans getappropriate page');
+      console.log(this.userFromAPI);
+      console.log(this.rgpdMap);
+      this.router.navigate(['/home-results']);
+    } else {
+      console.log('dans else de getappropriate page');
+      console.log(this.userFromAPI);
+      console.log(this.rgpdMap);
+      this.router.navigate(['/rgpd']);
+    }
   }
 
   async forgotPass() {
@@ -125,5 +154,6 @@ export class LoginPage implements OnInit {
   private updateUser() {
     this.userFromAPI.isOnLine = true;
     this.userAPILMTService.updateUser(this.userFromAPI);
+    this.router.navigate(['/home-results']);
   }
 }

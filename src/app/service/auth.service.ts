@@ -27,7 +27,6 @@ export class AuthService {
 
   // Partie Login
   login(email: string, password: string) {
-
     return new Promise((resolve, rejected) => {
       this.AFauth.auth.signInWithEmailAndPassword(email, password).then(user => {
         resolve(user);
@@ -39,9 +38,8 @@ export class AuthService {
       }).catch(err => rejected(err));
 
     });
-
   }
-// partie logout
+
   logout() {
     this.AFauth.auth.signOut().then(() => {
       this.localUser.isOnline = false;
@@ -74,7 +72,6 @@ export class AuthService {
     this.fs.collection('Users').get()
         .subscribe(usersDoc => {
               usersDoc.forEach(doc => {
-
                 let user: User;
                 user = <User>doc.data();
                 if (!this.usersMap.has(user.email)) {
@@ -90,7 +87,6 @@ export class AuthService {
   }
 
   updateUser(user?: User): void {
-
     this.fs.collection('Users').doc(user.userId)
         .set(Object.assign({
           name: user.name, isOnline: user.isOnline, email: user.email, userId: user.userId,
@@ -98,26 +94,8 @@ export class AuthService {
         }));
     this.users[this.users.indexOf(user)] = user;
     this.emitUsersSubject();
-
-  /*  getAllUsers(): void {
-      this.fs.collection('Users').get()
-          .subscribe(usersDoc => {
-                usersDoc.forEach(doc => {
-                  let user: User;
-                  user = <User>doc.data();
-                  if (!this.usersMap.has(user.email)) {
-                    this.usersMap.set(user.email, <User>doc.data());
-                  }
-                });
-              },
-              () => {
-                console.log('Erreur' + error);
-              })
-  };*/
-
-
   }
-
+1
   getUserByUserEmail(userEmail: string) {
     if (this.usersMap.has(userEmail)) {
       this.localUser = this.usersMap.get(userEmail);
