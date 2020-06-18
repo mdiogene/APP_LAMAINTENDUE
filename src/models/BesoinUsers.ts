@@ -5,7 +5,8 @@ import {BesoinsRemontes} from './BesoinsRemontes';
 
 export class BesoinUsers extends RestFullObject {
     user: UserAPILMT;
-    besoin: BesoinsRemontes;
+    besoinsRemontes: BesoinsRemontes;
+    quantite: number;
     participate: boolean;
     isOnUpdate: boolean;
     constructor(_links?: any) {

@@ -20,6 +20,7 @@ import {BesoinService} from '../../service/besoin.service';
     styleUrls: ['./besoin.page.scss'],
 })
 export class BesoinPage implements OnInit, OnDestroy {
+    besoinAjoute: boolean;
     besoin = new BesoinsRemontes();
     besoins: BesoinsRemontes[] = [];
     besoinsSubscription: Subscription;
@@ -53,6 +54,7 @@ export class BesoinPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.besoinAjoute = false;
         this.besoinsSubscription = this.besoinsAPILMTService.besoinsRemontesSubject.subscribe(
             (besoins: BesoinsRemontes[]) => {
 
@@ -102,7 +104,7 @@ export class BesoinPage implements OnInit, OnDestroy {
         this.besoins.forEach(besoin => {
             this.usersForBesoinsRemontes = [];
             this.besoinUsers.forEach(besoinUser => {
-                if ((besoinUser.besoin.id === besoin.id) && (besoinUser.participate === true)) {
+                if ((besoinUser.besoinsRemontes.id === besoin.id) && (besoinUser.participate === true)) {
                     this.usersForBesoinsRemontes.push(besoinUser.user);
                 }
             });
@@ -115,7 +117,10 @@ export class BesoinPage implements OnInit, OnDestroy {
         this.besoins.forEach(besoin => {
             this.usersForBesoinsRemontes = [];
             this.besoinUsers.forEach(besoinUser => {
-                if (besoinUser.besoin.id === besoin.id) {
+                console.log('user et userbesoin');
+                console.log(besoinUser);
+                console.log(besoin);
+                if (besoinUser.besoinsRemontes.id === besoin.id) {
                     this.allUsersForBesoinsRemontes.push(besoinUser.user);
                 }
             });
@@ -131,6 +136,7 @@ export class BesoinPage implements OnInit, OnDestroy {
     sendPartipation(besoin: BesoinsRemontes) {
         console.log('besoin ajouté');
         console.log(besoin);
+        this.besoinAjoute = false;
         this.getUsersForBesoinsRemontes();
         this.getUserConnectedWithAPILMT(this.af.auth.currentUser.uid);
         this.saveUserParticipation(besoin);
@@ -138,6 +144,7 @@ export class BesoinPage implements OnInit, OnDestroy {
 
     saveUserParticipation(besoin: BesoinsRemontes) {
         this.participantDejaInscrit = false;
+       // this.besoinUser.besoin = besoin;
         if (this.usersMap.has(besoin.id)) {
             const usersArrayLenght = this.usersMap.get(besoin.id);
 
@@ -148,14 +155,15 @@ export class BesoinPage implements OnInit, OnDestroy {
                 // if (besoin.participantMax > this.usersForBesoinsRemontes.length) {
                 this.canAddParticipant = true;
                 this.besoinUser.user = this.userFromAPI;
-                this.besoinUser.besoin = besoin;
+                this.besoinUser.besoinsRemontes = besoin;
+                this.besoinUser.quantite = besoin.quantite;
                 this.isParticipate(this.participate);
                 usersArrayLenght.forEach( user => {
-                    if (user.id === this.userFromAPI.id) {
+                    if (user.email === this.userFromAPI.email) {
                         this.canAddParticipant = false;
                     }
                     this.allUsersForBesoinsRemontes.forEach( userInscrit => {
-                        if (userInscrit.id === this.userFromAPI.id) {
+                        if (userInscrit.email === this.userFromAPI.email) {
                             this.participantDejaInscrit = true;
                         }
                     });
@@ -166,6 +174,7 @@ export class BesoinPage implements OnInit, OnDestroy {
 
                     // this.userAPILMTService.updateUser(this.userFromAPI);
                     this.besoinUserAPILMTService.addBesoinUsers(this.besoinUser);
+                    this.besoinAjoute = true;
                     this.usersMap.get(besoin.id).unshift(this.userFromAPI);
                 }
             } else {
@@ -176,7 +185,7 @@ export class BesoinPage implements OnInit, OnDestroy {
             this.besoinUser.user = this.userFromAPI;
             this.usersForBesoinsRemontes.unshift(this.userFromAPI);
             this.usersMap.set(besoin.id, this.usersForBesoinsRemontes);
-            this.besoinUser.besoin = besoin;
+            this.besoinUser.besoinsRemontes = besoin;
             this.isParticipate(this.participate);
             this.besoinUserAPILMTService.addBesoinUsers(this.besoinUser);
             this.canAddParticipant = true;
@@ -217,6 +226,7 @@ export class BesoinPage implements OnInit, OnDestroy {
     }
 
     next() {
+        this.besoinAjoute = false;
         this.getUsersForBesoinsRemontes();
         const besoinNext = this.besoin;
         if ((this.besoins.length > 1) && ((this.besoins.indexOf(this.besoin)) < (this.besoins.length - 1))) {
@@ -226,6 +236,7 @@ export class BesoinPage implements OnInit, OnDestroy {
     }
 
     previous() {
+        this.besoinAjoute = false;
         this.getUsersForBesoinsRemontes();
         const besoinPrevious = this.besoin;
         if ((this.besoins.length > 1) && ((this.besoins.indexOf(this.besoin)) > 0)) {

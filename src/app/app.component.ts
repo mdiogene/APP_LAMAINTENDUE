@@ -10,7 +10,6 @@ import {User} from '../models/User';
 import {AuthService} from './service/auth.service';
 import {UserApilmtService} from './service/user-apilmt.service';
 import {UserAPILMT} from '../models/UserAPILMT';
-import {RGPD} from '../models/RGPD';
 import {RgpdService} from './service/rgpd.service';
 
 @Component({
@@ -37,7 +36,7 @@ export class AppComponent {
   ) {
     this.appPages = [
       {
-        title: 'Home',
+        title: 'Accueil',
         url: '/home-results',
         direct: 'root',
         icon: 'home'
@@ -50,13 +49,13 @@ export class AppComponent {
       },
 
       {
-        title: 'Lchat',
+        title: 'Chat',
         url: '/chat',
         direct: 'forward',
         icon: 'chatbubbles'
       },
       {
-        title: 'Besoin',
+        title: 'Besoins',
         url: '/besoin',
         direct: 'forward',
         icon: 'basket'

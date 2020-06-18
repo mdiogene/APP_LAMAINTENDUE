@@ -62,6 +62,8 @@
             {{'  '}}
             <button type="button" class="btn btn-secondary" (click)="next()" [disabled]="!hasNext()">Maraude suivant</button>
         </div>
+        <label *ngIf="reponseAjoute">"Vous avez répondu avec succès au maraude."</label>
+
     </form>
 
 </ion-content>

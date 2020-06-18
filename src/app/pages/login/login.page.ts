@@ -76,21 +76,15 @@ export class LoginPage implements OnInit {
     this.authService.login(this.email, this.password).then(res => {
       this.userAPILMTService.getUserByEmail(this.email);
       this.getAppropriatePage();
-      // this.updateUser();
-  // const pass = Md5.hashStr(this.password).toString();
     }).catch(er => alert('user n\'existe pas'));
   }
 
   getAppropriatePage() {
     if (this.rgpdMap.has(this.userFromAPI.id)) {
-      console.log('dans getappropriate page');
-      console.log(this.userFromAPI);
-      console.log(this.rgpdMap);
+
       this.router.navigate(['/home-results']);
     } else {
-      console.log('dans else de getappropriate page');
-      console.log(this.userFromAPI);
-      console.log(this.rgpdMap);
+
       this.router.navigate(['/rgpd']);
     }
   }

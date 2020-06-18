@@ -47,9 +47,13 @@ export class BesoinUsersService {
   // Création du besoin reponseAuxBesoins
   addBesoinUsers(reponseAuxBesoins: BesoinUsers): void {
     this.loadingService.showLoading();
-    this.http.post<BesoinUsers>(this.reponseAuxBesoinsAPILMTUrl, reponseAuxBesoins).subscribe(
+      console.log('besoin user participants dans le service avant ajout');
+      console.log(reponseAuxBesoins);
+
+
+      this.http.post<BesoinUsers>(this.reponseAuxBesoinsAPILMTUrl, reponseAuxBesoins).subscribe(
         next => {
-            console.log('besoin user participants dans le service');
+            console.log('besoin user participants dans le service apres ajout');
             console.log(next);
 
             this.reponseAuxBesoins[this.reponseAuxBesoins.indexOf(reponseAuxBesoins)] = next;

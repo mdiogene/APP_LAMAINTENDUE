@@ -37,7 +37,7 @@ Type de Besoin : {{besoin.typeBesoin ? besoin.typeBesoin.type : '' }}
       <ion-item no-padding class="animated fadeInUp">
         <p>
       <ion-label position="floating">
-        Nom Type Service : {{besoin.service ? besoin.service.typeNom : ''}}
+        Type Service : {{besoin.service ? besoin.service.typeNom : ''}}
       </ion-label>
         </p>
 
@@ -104,6 +104,9 @@ Quantité : {{besoin.quantite}}
     <button type="button" class="btn btn-secondary" (click)="next()" [disabled]="!hasNext()">Besoin suivant</button>
   </div>
   </div>
+
+
+  <label *ngIf="besoinAjoute">"Vous avez répondu avec succès au besoin."</label>
 </form>
 </ion-content>
 

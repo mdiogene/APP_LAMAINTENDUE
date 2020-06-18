@@ -40,6 +40,7 @@ export class MaraudePage implements OnInit, OnDestroy {
     usersMap = new Map<number, UserAPILMT[]>();
     private participantDejaInscrit = false;
     private allUsersForMaraude: UserAPILMT[] = [];
+    reponseAjoute: boolean;
 
     constructor(private datePipe: DatePipe,
                 public af: AngularFireAuth,
@@ -50,6 +51,7 @@ export class MaraudePage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.reponseAjoute = false;
         this.maraudesSubscription = this.maraudesAPILMTService.maraudesSubject.subscribe(
             (maraudes: Maraude[]) => {
 
@@ -158,6 +160,7 @@ export class MaraudePage implements OnInit, OnDestroy {
                 if (this.canAddParticipant) {
                     this.userAPILMTService.updateUser(this.userFromAPI);
                     this.maraudeUserAPILMTService.addMaraudeUser(this.maraudeUser);
+                    this.reponseAjoute = true;
                     this.usersMap.get(maraude.id).unshift(this.userFromAPI);
                 }
             } else {
@@ -210,6 +213,7 @@ export class MaraudePage implements OnInit, OnDestroy {
 
     next() {
         this.getUsersForMaraude();
+        this.reponseAjoute = false;
         const maraudeNext = this.maraude;
         if ((this.maraudes.length > 1) && ((this.maraudes.indexOf(this.maraude)) < (this.maraudes.length - 1))) {
             this.maraude = this.maraudes[this.maraudes.indexOf(maraudeNext) + 1];
@@ -219,6 +223,7 @@ export class MaraudePage implements OnInit, OnDestroy {
 
     previous() {
         this.getUsersForMaraude();
+        this.reponseAjoute = false;
         const maraudePrevious = this.maraude;
         if ((this.maraudes.length > 1) && ((this.maraudes.indexOf(this.maraude)) > 0)) {
             this.maraude = this.maraudes[this.maraudes.indexOf(maraudePrevious) - 1];
