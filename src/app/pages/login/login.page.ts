@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
     this.authService.login(this.email, this.password).then(res => {
       this.userAPILMTService.getUserByEmail(this.email);
       this.getAppropriatePage();
-    }).catch(er => alert('user n\'existe pas'));
+    }).catch();
   }
 
   getAppropriatePage() {

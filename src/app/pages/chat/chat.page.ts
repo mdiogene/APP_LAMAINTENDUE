@@ -67,13 +67,13 @@ export class ChatPage implements OnInit, OnDestroy {
                 private roleAPILMTService: RoleApilmtService,
                 public file: File) {
 
-                    this.userSubscription = this.authService.userSubject.subscribe(
-                        (user: User) => {
-                          this.localUser = user;
-                        }
-                    );
-                    this.authService.getAllUsers();
-                   // this.initializeApp();
+        this.userSubscription = this.authService.userSubject.subscribe(
+            (user: User) => {
+                this.localUser = user;
+            }
+        );
+        this.authService.getAllUsers();
+        // this.initializeApp();
 
 
 
@@ -84,15 +84,15 @@ export class ChatPage implements OnInit, OnDestroy {
         );
     }
 
-  ionViewDidEnter() {
-    this.content.scrollToBottom(1);
-  }
+    ionViewDidEnter() {
+        this.content.scrollToBottom(1);
+    }
 
 
-  scrollToBottomOnInit() {
-    this.content.scrollToBottom(1);
+    scrollToBottomOnInit() {
+        this.content.scrollToBottom(1);
 
-  }
+    }
     getPhoto(event) {
         const id = Math.random().toString(36).substring(2);
         this.Ref = this.storage.ref(id);
@@ -128,17 +128,17 @@ export class ChatPage implements OnInit, OnDestroy {
     }
 
     sendPicture(downloadURL: string) {
-            this.getUserConnectedWithAPILMT(this.af.auth.currentUser.uid);
-            console.log(this.af.auth.currentUser.uid);
-            this.fs.collection('chats').add({
-                Name: this.localUserIsLogged.prenom,
-                urlPicture: downloadURL,
-                userId: this.af.auth.currentUser.uid,
-                userEmail: this.af.auth.currentUser.email,
-                Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            this.content.scrollToBottom();
-            this.ionViewDidEnter();
+        this.getUserConnectedWithAPILMT(this.af.auth.currentUser.uid);
+        console.log(this.af.auth.currentUser.uid);
+        this.fs.collection('chats').add({
+            Name: this.localUserIsLogged.prenom,
+            urlPicture: downloadURL,
+            userId: this.af.auth.currentUser.uid,
+            userEmail: this.af.auth.currentUser.email,
+            Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        this.content.scrollToBottom();
+        this.ionViewDidEnter();
     }
 
     ngOnInit() {
@@ -204,7 +204,7 @@ export class ChatPage implements OnInit, OnDestroy {
             const chatsecond = chat;
             chatsecond.forEach((champ: Chat) => {
                 if (champ.Timestamp) {
-                  //  this.userFromAPI = this.userAPILMTService.getUserByEmail(champ.userEmail);
+                    //  this.userFromAPI = this.userAPILMTService.getUserByEmail(champ.userEmail);
                     this.mapEmailChat.set(champ.Timestamp, champ);
                 }
             });
